@@ -3,19 +3,62 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Light theme */
+  --background: #f5f3ff;
+  --foreground: #1a1a1a;
+  
+  --primary: #6d28d9;
+  --primary-hover: #5b21b6;
+  
+  --secondary: #ffffff;
+  --secondary-foreground: #4338ca;
+  
+  --accent: #ede9fe;
+  --accent-foreground: #6d28d9;
+  
+  --muted: #f3f4f6;
+  --muted-foreground: #6b7280;
+
+  /* Subtle shadow */
+  --card-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #1a1a2e; 
+    --foreground: #f8fafc;
+    
+    --primary: #a78bfa;
+    --primary-hover: #8b5cf6;
+    
+    --secondary: #0c0509;
+    --secondary-foreground: #e2e8f0;
+    
+    --accent: #372c5b;
+    --accent-foreground: #a78bfa;
+    
+    --muted: #1e293b;
+    --muted-foreground: #a1a1aa;
+
+    --card-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
   }
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+/* Subtle background pattern */
+.bg-pattern {
+  background-color: var(--background);
+  background-image: radial-gradient(
+    circle at center,
+    var(--primary) 1px,
+    transparent 1px
+  );
+  background-size: 32px 32px;
+  background-position: 0 0;
+  opacity: 0.03;
 }

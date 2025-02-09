@@ -1,9 +1,15 @@
+// tailwind.config.js
+
 /** @type {import('tailwindcss').Config} */
+import { heroui } from '@heroui/react';
+
 const config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    // HeroUI
+    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -35,7 +41,7 @@ const config = {
       },
     },
   },
-  plugins: [],
+  plugins: [heroui()],
 };
 
 export default config;

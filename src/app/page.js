@@ -1,3 +1,4 @@
+// app/page.js
 import React from "react";
 import { Github, Linkedin, Mail } from "lucide-react";
 import Image from "next/image";
@@ -240,3 +241,5 @@ const PortfolioLayout = () => {
 };
 
 export default PortfolioLayout;
+
+//test

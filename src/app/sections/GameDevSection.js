@@ -90,7 +90,7 @@ const GameDevSection = ({ className }) => {
                                 );
                                 onOpen();
                               }}
-                              className="text-left px-3 py-2 rounded-md text-sm hover:bg-secondary/50 text-secondary-foreground flex items-center gap-2"
+                              className="text-left px-3 py-2 rounded-md text-sm hover:bg-secondary/50 hover:text-primary text-secondary-foreground flex items-center gap-2"
                             >
                               {attachment.type === "video" ? (
                                 <Play className="w-4 h-4" />

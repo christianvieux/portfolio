@@ -1,35 +1,45 @@
 // sections/HeroSection.js
 import Image from "next/image";
+import { heroContent } from "../data/heroContent";
 
-const HeroSection = ({className}) => {
+
+const HeroSection = ({ className }) => {
+  const renderTagline = (content) => {
+    return content.map((item, index) => (
+      <span
+        key={index}
+        className={item.highlight ? "font-semibold text-primary" : ""}
+      >
+        {item.text}
+      </span>
+    ));
+  };
+
   return (
-    <section className={`pt-32 bg-secondary ${className}`}>
-      <div className="py-2 max-w-6xl mx-auto px-4">
-        <div className="text-center">
-          <h1 className="text-5xl font-bold mb-6 text-foreground">
-            Full Stack Web Developer
-          </h1>
-
+    <section 
+      className={`flex items-center justify-center bg-secondary ${className}`}
+    >
+      <div className="py-8 max-w-6xl mx-auto px-4">
+        <div className="text-center space-y-8">
           <div className="mb-8">
-            <div className="w-32 h-32 mx-auto relative rounded-full overflow-hidden border-2 border-primary/20">
+            <div className="w-36 h-36 md:w-40 md:h-40 mx-auto relative rounded-full overflow-hidden border-2 border-primary/20 shadow-lg">
               <Image
-                src="https://res.cloudinary.com/dqbydfphk/image/upload/v1739083627/profile_fbibnp.jpg"
-                alt="Christian Vieux"
+                src={heroContent.image.src}
+                alt={heroContent.image.alt}
                 fill
                 priority
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 128px"
+                className="object-cover transition-transform"
+                sizes="(max-width: 768px) 144px, 160px"
               />
             </div>
           </div>
 
-          <p className="text-xl text-secondary-foreground mb-8 max-w-2xl mx-auto">
-            Focused on crafting robust{" "}
-            <span className="font-semibold text-primary">backend solutions</span>{" "}
-            with
-            <span className="font-semibold text-primary"> Node.js</span>,
-            <span className="font-semibold text-primary"> SQL</span>, and
-            <span className="font-semibold text-primary"> cloud technologies</span>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground tracking-tight">
+            {heroContent.title}
+          </h1>
+
+          <p className="text-lg md:text-xl text-secondary-foreground max-w-2xl mx-auto leading-relaxed">
+            {renderTagline(heroContent.tagline)}
           </p>
         </div>
       </div>

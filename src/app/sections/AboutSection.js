@@ -1,6 +1,22 @@
 // sections/AboutSection.js
 import { aboutContent } from '../data/aboutContent';
 
+const SkillsList = ({ skills }) => {
+  return (
+    <ul className="flex flex-wrap gap-2 text-muted-foreground leading-relaxed">
+      {skills.map((skill, index) => (
+        <li
+          key={`frontend-skill-${index}`}
+          className="flex items-center"
+        >
+          <span className="mr-1">•</span>
+          <span>{skill}</span>
+        </li>
+      ))}
+    </ul>
+  );
+};
+
 const AboutSection = ({ className }) => {
   const { mainDescription, skills } = aboutContent;
 
@@ -25,31 +41,13 @@ const AboutSection = ({ className }) => {
               <h3 className="font-semibold text-foreground text-xl mb-4">
                 Frontend Development
               </h3>
-              <p className="gap-x-2 flex flex-wrap text-muted-foreground leading-relaxed">
-                {skills.frontend.map((skill, index) => (
-                  <li
-                    key={index}
-                    className="flex"
-                  >
-                    {`• ${skill}`}
-                  </li>
-                ))}
-              </p>
+              <SkillsList skills={skills.frontend}/>
             </div>
             <div className="space-y-2">
               <h3 className="font-semibold text-foreground text-xl mb-4">
                 Backend & Infrastructure
               </h3>
-              <p className="gap-x-2 flex flex-wrap text-muted-foreground leading-relaxed">
-                {skills.backend.map((skill, index) => (
-                  <li
-                    key={index}
-                    className="flex"
-                  >
-                    {`• ${skill}`}
-                  </li>
-                ))}
-              </p>
+              <SkillsList skills={skills.backend}/>
             </div>
           </div>
         </div>

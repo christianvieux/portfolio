@@ -14,7 +14,7 @@ import {
     const {
       title,
       description,
-      image,
+      demo,
       technologies,
       features,
       liveLink,
@@ -41,22 +41,25 @@ import {
               <ModalHeader className="flex flex-col gap-1">{title}</ModalHeader>
               <ModalBody>
                 <div className="space-y-6">
-                  {/* Project Image */}
-                  <div className="relative aspect-video rounded-lg overflow-hidden">
-                    {image ? (
-                      <Image
-                        src={image}
-                        alt={title}
-                        fill
-                        className="object-fill"
-                        sizes="(max-width: 1200px) 100vw, 1200px"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-secondary flex items-center justify-center">
-                        <span className="text-secondary-foreground">No preview available</span>
-                      </div>
-                    )}
-                  </div>
+                  {/* Project Demo Video */}
+                <div className="relative aspect-video rounded-lg overflow-hidden">
+                  {demo ? (
+                    <video
+                      src={demo}
+                      controls
+                      className="w-full h-full object-fill"
+                      poster={project.thumbnail} // Optional: Add a thumbnail for the video
+                      preload="metadata" // Only load video metadata initially for better performance
+                    >
+                      Your browser does not support the video tag.
+                      <a href={demo} className="text-primary">Download video</a>
+                    </video>
+                  ) : (
+                    <div className="w-full h-full bg-secondary flex items-center justify-center">
+                      <span className="text-secondary-foreground">No demo available</span>
+                    </div>
+                  )}
+                </div>
   
                   {/* Description */}
                   <p className="text-secondary-foreground text-lg leading-relaxed">

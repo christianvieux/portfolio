@@ -273,7 +273,7 @@ export const projects = [
     image:
       "https://res.cloudinary.com/dqbydfphk/image/upload/v1739083627/TrackFusionWeb_Thumbnail_ce0rsv.png",
     demo: {
-      url: "https://trackfusionweb-storage.s3.us-east-2.amazonaws.com/TrackFusionWeb_Demo_Video/Demo_Video_trackfusionweb+-+Made+with+Clipchamp.mp4",
+      url: "https://christianvportfolio.s3.us-east-1.amazonaws.com/Demo_Video_trackfusionweb+",
       timestamps: [
         { time: "00:00", label: "Project Overview & Tech Stack" },
         { time: "01:18", label: "Homepage & Navigation" },

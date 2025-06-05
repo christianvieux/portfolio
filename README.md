@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# My Portfolio
+
+Hello! 👋 This is the code behind my personal portfolio website. I built it to showcase my projects and share a bit about who I am with potential recruiters, employers, and fellow developers.
+
+🌐 **[Check out the live website](https://my-portfolio-beta-plum-98.vercel.app/)**
+
+## About This Project
+
+I created this using Next.js and Tailwind CSS. It's a straightforward portfolio site that includes:
+- Information about me and my journey
+- Projects I've worked on
+- My current tech stack
+- Ways to contact me
+
+## A Note About the Code
+
+This was built primarily for my own use, so you might find some areas where the code could be more organized or better structured. While it works well for my needs, it wasn't initially designed with the intention of being a template for others.
+
+That said, feel free to:
+- Take inspiration from it
+- Learn from what I did
+- Use pieces of it for your own portfolio
 
 ## Getting Started
 
-First, run the development server:
+If you want to run this locally:
 
 ```bash
+# Install dependencies
+npm install
+
+# Run the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open [http://localhost:3000](http://localhost:3000) to check it out.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Future Plans
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+I might clean up the code and make it more customizable in the future, but for now, it serves its primary purpose - showing my work to potential employers and collaborators.
 
-## Learn More
+## Questions?
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Feel free to reach out if you have questions about anything in here. I'm always happy to help fellow developers!

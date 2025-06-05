@@ -1,26 +1,90 @@
+/* Import Tailwindcss */
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Hero UI */
+@plugin './hero.js';
+@source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+
+/* Tailwind CSS */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+/* Dark Variant */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* DARK THEME */
+/* @media (prefers-color-scheme: dark)*/ .dark {
+  /* :root { */
+    --color-background: #0c0509;           /** page background */
+    --color-foreground: #ffffff;           /** main text, links */
+    --color-primary: #9B7EBD;              /** buttons, links, highlights */
+    --color-primary-hover: #c7aedd;        /** hover for buttons/links */
+    --color-secondary: #1b1a28;            /** cards, modals, sections */
+    --color-secondary-hover: #2b2639;      /** hover bg for cards or buttons */
+    --color-secondary-foreground: #D4BEE4; /** text/icons on cards or modals */
+    --color-accent: #D4BEE4;               /** tags, pills, outlines, borders */
+    --color-accent-foreground: #3B1E54;    /** text/icons inside tags/pills */
+    --color-muted: #1e1a25;                /** disabled bg, dividers, subtle areas */
+    --color-muted-foreground: #a1a1aa;     /** disabled/help text, placeholders */
+    --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3); /** card/drop shadow */
+  /* } */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+/* LIGHT THEME */
+@theme {
+  --color-background: #ffffff; /* page background */
+  --color-foreground: #1a1a1a; /* main text, links */
+  --color-primary: #7c5ba6; /* buttons, links, highlights */
+  --color-primary-hover: #6b4d94; /* hover for buttons/links */
+  --color-secondary: #f8f7fa; /* cards, modals, sections */
+  --color-secondary-hover: #f0eef4; /* hover bg for cards or buttons */
+  --color-secondary-foreground: #2d1b3d; /* text/icons on cards or modals */
+  --color-accent: #9B7EBD; /* tags, pills, outlines, borders */
+  --color-accent-foreground: #ffffff; /* text/icons inside tags/pills */
+  --color-muted: #f5f5f5; /* disabled bg, dividers, subtle areas */
+  --color-muted-foreground: #6b7280; /* disabled/help text, placeholders */
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); /* card/drop shadow */
+
+
+  
+  /* Custom breakpoint */
+  --breakpoint-nav: 950px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Giving smooth changes to colors */
+:root, .dark {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+body {
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+
+/* Define custom utilities */
+@layer utilities {
+  .fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Define custom components */
+@layer components {
+  .card {
+    box-shadow: var(--shadow-card);
+  }
+}
+
+/* This styling is for the react-markdown */
+@layer base {
+  strong, b {
+    @apply font-semibold text-[color:var(--color-primary)];
+  }
 }

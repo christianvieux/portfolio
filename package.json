@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "my-portfolio",
   "version": "0.1.0",
   "private": true,
@@ -9,15 +10,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroui/react": "^2.8.0-beta.6",
+    "embla-carousel-react": "^8.6.0",
+    "lucide-react": "^0.511.0",
+    "next": "15.3.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next": "15.3.2"
+    "react-markdown": "^10.1.0"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
     "eslint": "^9",
     "eslint-config-next": "15.3.2",
-    "@eslint/eslintrc": "^3"
+    "tailwindcss": "^4"
   }
 }

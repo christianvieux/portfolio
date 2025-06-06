@@ -135,7 +135,7 @@ export const projects = [
 
   // QuoteFolio Project
   {
-    period: "April 2 2025",
+    period: "April 17 2025",
     title: "QuoteFolio",
     summary:
       "**Quotes sharing platform** built with the MERN stack. Features a **clean interface** for sharing and discovering quotes, with user authentication and interactive features.",
@@ -189,14 +189,14 @@ export const projects = [
         ],
       },
     ],
-    developmentPeriod: "March 21 2025 - April 2 2025",
+    developmentPeriod: "April 11 2025 - April 17 2025",
     liveLink: "http://44.203.74.69:3002/home",
     githubLink: "https://github.com/christianvieux/GA_Project_3_QuoteFolio",
   },
 
   // Recipe Project
   {
-    period: "March 14 2025",
+    period: "April 2 2025",
     title: "Recipes",
     summary:
       "A **recipe management platform** built with Express and MongoDB. Features a **responsive interface** for sharing recipes, with user authentication and commenting system.",
@@ -250,7 +250,7 @@ export const projects = [
         ],
       },
     ],
-    developmentPeriod: "March 7 2025 - March 14 2025",
+    developmentPeriod: "March 27 2025 - April 2 2025",
     liveLink: "http://44.203.74.69:3008/home",
     githubLink: "https://github.com/christianvieux/GA_Project_2_Recipe",
   },

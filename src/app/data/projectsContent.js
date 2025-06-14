@@ -67,7 +67,7 @@ export const projects = [
       },
     ],
     developmentPeriod: "May 9 2025 - May 21 2025",
-    liveLink: "http://44.203.74.69:3006/home",
+    liveLink: "http://54.165.74.209:3006/home",
     githubLink:
       "https://github.com/christianvieux/GA_Project_Final_File-Sharing-App",
   },
@@ -129,7 +129,7 @@ export const projects = [
       },
     ],
     developmentPeriod: "April 29 2025 - May 6 2025",
-    liveLink: "http://44.203.74.69:3004/",
+    liveLink: "http://54.165.74.209:3004/",
     githubLink: "https://github.com/christianvieux/GA_Project_4_ChapertList",
   },
 
@@ -190,7 +190,7 @@ export const projects = [
       },
     ],
     developmentPeriod: "April 11 2025 - April 17 2025",
-    liveLink: "http://44.203.74.69:3002/home",
+    liveLink: "http://54.165.74.209:3002/home",
     githubLink: "https://github.com/christianvieux/GA_Project_3_QuoteFolio",
   },
 
@@ -251,7 +251,7 @@ export const projects = [
       },
     ],
     developmentPeriod: "March 27 2025 - April 2 2025",
-    liveLink: "http://44.203.74.69:3008/home",
+    liveLink: "http://54.165.74.209:3000/home",
     githubLink: "https://github.com/christianvieux/GA_Project_2_Recipe",
   },
 
@@ -273,7 +273,7 @@ export const projects = [
     image:
       "https://res.cloudinary.com/dqbydfphk/image/upload/v1739083627/TrackFusionWeb_Thumbnail_ce0rsv.png",
     demo: {
-      url: "https://christianvportfolio.s3.us-east-1.amazonaws.com/Demo_Video_trackfusionweb+",
+      url: "https://christianvieux-public-files.s3.us-east-1.amazonaws.com/videos/Demo_Video_trackfusionweb.mp4",
       timestamps: [
         { time: "00:00", label: "Project Overview & Tech Stack" },
         { time: "01:18", label: "Homepage & Navigation" },
@@ -349,7 +349,7 @@ export const projects = [
       },
     ],
     developmentPeriod: "May 10 2023 - Dec 30 2024",
-    liveLink: "https://www.trackfusionweb.com/home",
+    liveLink: "https://trackfusionweb.vercel.app/home",
     githubLink: "https://github.com/christianvieux/TrackFusionWeb",
   },
 ];

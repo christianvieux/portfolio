@@ -67,7 +67,7 @@ export const projects = [
       },
     ],
     developmentPeriod: "May 9 2025 - May 21 2025",
-    liveLink: "http://54.165.74.209:3006/home",
+    liveLink: "http://44.215.35.137:3006/home",
     githubLink:
       "https://github.com/christianvieux/GA_Project_Final_File-Sharing-App",
   },
@@ -129,7 +129,7 @@ export const projects = [
       },
     ],
     developmentPeriod: "April 29 2025 - May 6 2025",
-    liveLink: "http://54.165.74.209:3004/",
+    liveLink: "http://44.215.35.137:3004/",
     githubLink: "https://github.com/christianvieux/GA_Project_4_ChapertList",
   },
 
@@ -190,7 +190,7 @@ export const projects = [
       },
     ],
     developmentPeriod: "April 11 2025 - April 17 2025",
-    liveLink: "http://54.165.74.209:3002/home",
+    liveLink: "http://44.215.35.137:3002/home",
     githubLink: "https://github.com/christianvieux/GA_Project_3_QuoteFolio",
   },
 
@@ -251,7 +251,7 @@ export const projects = [
       },
     ],
     developmentPeriod: "March 27 2025 - April 2 2025",
-    liveLink: "http://54.165.74.209:3000/home",
+    liveLink: "http://44.215.35.137:3000/home",
     githubLink: "https://github.com/christianvieux/GA_Project_2_Recipe",
   },
 

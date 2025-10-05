@@ -2,7 +2,7 @@
 
 Hello! 👋 This is the code behind my personal portfolio website. I built it to showcase my projects and share a bit about who I am with potential recruiters, employers, and fellow developers.
 
-🌐 **[Check out the live website](https://my-portfolio-beta-plum-98.vercel.app/)**
+🌐 **[Check out the live website](https://www.christianvieuxdev.com/)**
 
 ## About This Project
 

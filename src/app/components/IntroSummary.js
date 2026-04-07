@@ -1,7 +1,7 @@
 // components/IntroSummary.js
 
-import Markdown from "react-markdown";
-import { heroContent } from "../data/heroContent";
+import Markdown from 'react-markdown'
+import { heroContent } from '../data/heroContent'
 
 export default function IntroSummary({ className }) {
     return (
@@ -12,7 +12,10 @@ export default function IntroSummary({ className }) {
             <Markdown
                 components={{
                     p: ({ node, children, ...props }) => (
-                        <p className="mb-4 text-foreground leading-relaxed" {...props}>
+                        <p
+                            className="mb-4 leading-relaxed text-foreground"
+                            {...props}
+                        >
                             {children}
                         </p>
                     ),
@@ -22,4 +25,4 @@ export default function IntroSummary({ className }) {
             </Markdown>
         </div>
     )
-};
+}

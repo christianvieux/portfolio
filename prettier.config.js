@@ -5,12 +5,12 @@
  * @type {import("prettier").Config}
  */
 const config = {
-  trailingComma: "es5",
-  tabWidth: 4,
-  semi: false,
-  singleQuote: true,
-  plugins: ["prettier-plugin-tailwindcss"],
-  "tailwindStylesheet": "./src/app/global.css"
-};
+    trailingComma: 'es5',
+    tabWidth: 4,
+    semi: false,
+    singleQuote: true,
+    plugins: ['prettier-plugin-tailwindcss'],
+    tailwindStylesheet: './src/app/global.css',
+}
 
-export default config;
+export default config

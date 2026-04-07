@@ -1,189 +1,209 @@
 // sections/NavSection.js
-"use client";
+'use client'
 
-import { useState, useEffect, useRef } from "react";
-import { Menu, X } from "lucide-react";
-import DarkModeSwitch from "../components/DarkModeSwitch";
+import { useState, useEffect, useRef } from 'react'
+import { Menu, X } from 'lucide-react'
+import DarkModeSwitch from '../components/DarkModeSwitch'
 
 // ─── Reusable nav link ────────────────────────────────────────────────────────
 const NavLink = ({ href, label, onClick }) => (
-  <a
-    href={href}
-    onClick={onClick}
-    className="text-foreground hover:text-primary transition-colors duration-200 text-sm font-medium"
-  >
-    {label}
-  </a>
-);
+    <a
+        href={href}
+        onClick={onClick}
+        className="text-sm font-medium text-foreground transition-colors duration-200 hover:text-primary"
+    >
+        {label}
+    </a>
+)
 
 // ─── Nav items config ─────────────────────────────────────────────────────────
 const NAV_LINKS = [
-  { href: "#",         label: "Home"     },
-  { href: "#projects", label: "Projects" },
-  { href: "#gamedev",  label: "Game Dev" },
-  { href: "#about",    label: "About"    },
-  { href: "#focus",    label: "Focus"    },
-  { href: "#contact",  label: "Contact"  },
-];
+    { href: '#', label: 'Home' },
+    { href: '#projects', label: 'Projects' },
+    { href: '#gamedev', label: 'Game Dev' },
+    { href: '#about', label: 'About' },
+    { href: '#focus', label: 'Focus' },
+    { href: '#contact', label: 'Contact' },
+]
 
 // ─── Resume Modal (native — no HeroUI dependency) ─────────────────────────────
 const ResumeModal = ({ isOpen, onClose }) => {
-  // Close on Escape key
-  useEffect(() => {
-    if (!isOpen) return;
-    const handleKey = (e) => { if (e.key === "Escape") onClose(); };
-    document.addEventListener("keydown", handleKey);
-    return () => document.removeEventListener("keydown", handleKey);
-  }, [isOpen, onClose]);
+    // Close on Escape key
+    useEffect(() => {
+        if (!isOpen) return
+        const handleKey = (e) => {
+            if (e.key === 'Escape') onClose()
+        }
+        document.addEventListener('keydown', handleKey)
+        return () => document.removeEventListener('keydown', handleKey)
+    }, [isOpen, onClose])
 
-  // Lock body scroll while open
-  useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [isOpen]);
+    // Lock body scroll while open
+    useEffect(() => {
+        document.body.style.overflow = isOpen ? 'hidden' : ''
+        return () => {
+            document.body.style.overflow = ''
+        }
+    }, [isOpen])
 
-  if (!isOpen) return null;
+    if (!isOpen) return null
 
-  return (
-    <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
-      onClick={onClose}
-    >
-      {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
-
-      {/* Dialog */}
-      <div
-        className="relative z-10 w-full max-w-5xl rounded-xl bg-background shadow-2xl overflow-hidden"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute top-3 right-3 z-20 p-1.5 rounded-md text-foreground hover:bg-secondary transition-colors cursor-pointer"
-          aria-label="Close"
+    return (
+        <div
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+            onClick={onClose}
         >
-          <X size={18} />
-        </button>
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
 
-        <iframe
-          src="/resume.pdf"
-          className="w-full h-[calc(100vh-8rem)]"
-          title="Resume"
-        />
-      </div>
-    </div>
-  );
-};
+            {/* Dialog */}
+            <div
+                className="relative z-10 w-full max-w-5xl overflow-hidden rounded-xl bg-background shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
+            >
+                {/* Close button */}
+                <button
+                    onClick={onClose}
+                    className="absolute top-3 right-3 z-20 cursor-pointer rounded-md p-1.5 text-foreground transition-colors hover:bg-secondary"
+                    aria-label="Close"
+                >
+                    <X size={18} />
+                </button>
+
+                <iframe
+                    src="/resume.pdf"
+                    className="h-[calc(100vh-8rem)] w-full"
+                    title="Resume"
+                />
+            </div>
+        </div>
+    )
+}
 
 // ─── Main component ───────────────────────────────────────────────────────────
 const NavSection = () => {
-  const [isMenuOpen, setIsMenuOpen]   = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode]   = useState(() => {
-    if (typeof window === "undefined") return true;
-    console.log("mode is", window.matchMedia("(prefers-color-scheme: dark)").matches);
-    const stored = localStorage.getItem("darkMode");
-    if (stored !== null) return JSON.parse(stored);
-    return window.matchMedia("(prefers-color-scheme: dark)").matches;
-  });
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isDarkMode, setIsDarkMode] = useState(() => {
+        if (typeof window === 'undefined') return true
+        console.log(
+            'mode is',
+            window.matchMedia('(prefers-color-scheme: dark)').matches
+        )
+        const stored = localStorage.getItem('darkMode')
+        if (stored !== null) return JSON.parse(stored)
+        return window.matchMedia('(prefers-color-scheme: dark)').matches
+    })
 
-  const navRef = useRef(null);
+    const navRef = useRef(null)
 
-  // Close mobile menu on outside click
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (navRef.current && !navRef.current.contains(e.target)) {
-        setIsMenuOpen(false);
-      }
-    };
-    if (isMenuOpen) document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [isMenuOpen]);
+    // Close mobile menu on outside click
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (navRef.current && !navRef.current.contains(e.target)) {
+                setIsMenuOpen(false)
+            }
+        }
+        if (isMenuOpen)
+            document.addEventListener('mousedown', handleClickOutside)
+        return () =>
+            document.removeEventListener('mousedown', handleClickOutside)
+    }, [isMenuOpen])
 
-  // Lock body scroll when mobile menu is open
-  useEffect(() => {
-    if (isModalOpen) return; // modal handles its own scroll lock
-    document.body.style.overflow = isMenuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [isMenuOpen, isModalOpen]);
+    // Lock body scroll when mobile menu is open
+    useEffect(() => {
+        if (isModalOpen) return // modal handles its own scroll lock
+        document.body.style.overflow = isMenuOpen ? 'hidden' : ''
+        return () => {
+            document.body.style.overflow = ''
+        }
+    }, [isMenuOpen, isModalOpen])
 
-  const closeMenu = () => setIsMenuOpen(false);
+    const closeMenu = () => setIsMenuOpen(false)
 
-  return (
-    <>
-      {/* ── Navbar ── */}
-      <nav
-        ref={navRef}
-        className="
-          fixed top-0 left-0 right-0 z-50
-          bg-background/80 backdrop-blur-md
-          border-b border-accent/20
-          transition-colors duration-300
-          max-w-screen
-        "
-      >
-        <div className="w-full mx-auto px-6 h-16 flex items-center justify-between">
-
-          {/* Brand */}
-          <span className="text-xl font-bold text-foreground tracking-wide select-none">
-            CV
-          </span>
-
-          {/* Desktop links — hidden below 950px */}
-          <div className="hidden nav:flex items-center gap-6">
-            {NAV_LINKS.map((link) => (
-              <NavLink key={link.href} {...link} />
-            ))}
-
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="text-sm font-medium text-foreground hover:text-primary transition-colors duration-200 cursor-pointer"
+    return (
+        <>
+            {/* ── Navbar ── */}
+            <nav
+                ref={navRef}
+                className="fixed top-0 right-0 left-0 z-50 max-w-screen border-b border-accent/20 bg-background/80 backdrop-blur-md transition-colors duration-300"
             >
-              Resume
-            </button>
+                <div className="mx-auto flex h-16 w-full items-center justify-between px-6">
+                    {/* Brand */}
+                    <span className="text-xl font-bold tracking-wide text-foreground select-none">
+                        CV
+                    </span>
 
-            <DarkModeSwitch isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
-          </div>
+                    {/* Desktop links — hidden below 950px */}
+                    <div className="hidden items-center gap-6 nav:flex">
+                        {NAV_LINKS.map((link) => (
+                            <NavLink key={link.href} {...link} />
+                        ))}
 
-          {/* Mobile toggle — visible below 950px */}
-          <button
-            className="nav:hidden p-2 rounded-md text-foreground hover:bg-secondary-hover transition-colors duration-200 cursor-pointer"
-            onClick={() => setIsMenuOpen((prev) => !prev)}
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          >
-            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
-        </div>
+                        <button
+                            onClick={() => setIsModalOpen(true)}
+                            className="cursor-pointer text-sm font-medium text-foreground transition-colors duration-200 hover:text-primary"
+                        >
+                            Resume
+                        </button>
 
-        {/* Mobile menu drawer */}
-        {isMenuOpen && (
-          <div className="nav:hidden border-t border-accent/20 bg-background px-6 py-4 flex flex-col gap-4">
-            {NAV_LINKS.map((link) => (
-              <NavLink key={link.href} {...link} onClick={closeMenu} />
-            ))}
+                        <DarkModeSwitch
+                            isDarkMode={isDarkMode}
+                            setIsDarkMode={setIsDarkMode}
+                        />
+                    </div>
 
-            <button
-              onClick={() => { setIsModalOpen(true); closeMenu(); }}
-              className="text-sm font-medium text-left text-foreground hover:text-primary transition-colors duration-200 cursor-pointer"
-            >
-              Resume
-            </button>
+                    {/* Mobile toggle — visible below 950px */}
+                    <button
+                        className="cursor-pointer rounded-md p-2 text-foreground transition-colors duration-200 hover:bg-secondary-hover nav:hidden"
+                        onClick={() => setIsMenuOpen((prev) => !prev)}
+                        aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+                    >
+                        {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+                    </button>
+                </div>
 
-            <div className="pt-1">
-              <DarkModeSwitch isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
-            </div>
-          </div>
-        )}
-      </nav>
+                {/* Mobile menu drawer */}
+                {isMenuOpen && (
+                    <div className="flex flex-col gap-4 border-t border-accent/20 bg-background px-6 py-4 nav:hidden">
+                        {NAV_LINKS.map((link) => (
+                            <NavLink
+                                key={link.href}
+                                {...link}
+                                onClick={closeMenu}
+                            />
+                        ))}
 
-      {/* Spacer so page content sits below the fixed navbar */}
-      <div className="h-16" />
+                        <button
+                            onClick={() => {
+                                setIsModalOpen(true)
+                                closeMenu()
+                            }}
+                            className="cursor-pointer text-left text-sm font-medium text-foreground transition-colors duration-200 hover:text-primary"
+                        >
+                            Resume
+                        </button>
 
-      {/* ── Resume Modal ── */}
-      <ResumeModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-    </>
-  );
-};
+                        <div className="pt-1">
+                            <DarkModeSwitch
+                                isDarkMode={isDarkMode}
+                                setIsDarkMode={setIsDarkMode}
+                            />
+                        </div>
+                    </div>
+                )}
+            </nav>
 
-export default NavSection;
+            {/* Spacer so page content sits below the fixed navbar */}
+            <div className="h-16" />
+
+            {/* ── Resume Modal ── */}
+            <ResumeModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+            />
+        </>
+    )
+}
+
+export default NavSection

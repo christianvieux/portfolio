@@ -7,6 +7,7 @@ Hello! 👋 This is the code behind my personal portfolio website. I built it to
 ## About This Project
 
 I created this using Next.js and Tailwind CSS. It's a straightforward portfolio site that includes:
+
 - Information about me and my journey
 - Projects I've worked on
 - My current tech stack
@@ -17,6 +18,7 @@ I created this using Next.js and Tailwind CSS. It's a straightforward portfolio 
 This was built primarily for my own use, so you might find some areas where the code could be more organized or better structured. While it works well for my needs, it wasn't initially designed with the intention of being a template for others.
 
 That said, feel free to:
+
 - Take inspiration from it
 - Learn from what I did
 - Use pieces of it for your own portfolio

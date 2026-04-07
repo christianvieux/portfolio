@@ -1,7 +1,7 @@
 const contactContent = {
-    email: "christianvieux.dev@gmail.com",
-    linkedIn: "https://www.linkedin.com/in/christian-vieux-dev/",
-    gitHub: "https://github.com/christianvieux",
+    email: 'christianvieux.dev@gmail.com',
+    linkedIn: 'https://www.linkedin.com/in/christian-vieux-dev/',
+    gitHub: 'https://github.com/christianvieux',
 }
 
-export default contactContent;
+export default contactContent

@@ -2,10 +2,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import {
   Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
   Button,
 } from "@heroui/react";
 import Image from "next/image";
@@ -73,11 +69,11 @@ const ProjectModal = ({ isOpen, onOpenChange, project }) => {
         closeButton: "hover:bg-secondary-hover text-secondary-foreground",
       }}
     >
-      <ModalContent>
+      <Modal.Container>
         {(onClose) => (
           <>
             {/* Title */}
-            <ModalHeader className="flex flex-col gap-1">
+            <Modal.Header className="flex flex-col gap-1">
               <h2 className="text-xl font-bold text-foreground">{title}</h2>
               {/* Period / Time Period */}
               {developmentPeriod && (
@@ -85,9 +81,9 @@ const ProjectModal = ({ isOpen, onOpenChange, project }) => {
                   {developmentPeriod}
                 </p>
               )}
-            </ModalHeader>
+            </Modal.Header>
             {/* Body */}
-            <ModalBody ref={modalBodyRef}>
+            <Modal.Body ref={modalBodyRef}>
               {/* Scroll Indicator */}
               {showScrollIndicator && (
                 <div className="z-50 left-1/2 -translate-x-1/2 absolute origin-x-1/2 bottom-20 transform flex items-center justify-center py-2 transition-opacity duration-300">
@@ -276,8 +272,8 @@ const ProjectModal = ({ isOpen, onOpenChange, project }) => {
                   </div>
                 )}
               </div>
-            </ModalBody>
-            <ModalFooter>
+            </Modal.Body>
+            <Modal.Footer>
               {liveLink && (
                 <Button
                   as="a"
@@ -304,10 +300,10 @@ const ProjectModal = ({ isOpen, onOpenChange, project }) => {
                   <Code className="w-4 h-4" />
                 </Button>
               )}
-            </ModalFooter>
+            </Modal.Footer>
           </>
         )}
-      </ModalContent>
+      </Modal.Container>
     </Modal>
   );
 };

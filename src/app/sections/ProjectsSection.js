@@ -1,15 +1,19 @@
 // sections/ProjectsSection.js
-import ProjectCard from '../components/ProjectCard';
-import { projects } from '../data/projectsContent';
+import ProjectCard from "../components/ProjectCard";
+import { projects } from "../data/projectsContent";
 
-const ProjectsSection = ({className}) => {
+const ProjectsSection = ({ className }) => {
   return (
-    <section id="projects" className={`${className}`}>
-      <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-8 text-foreground">Projects</h2>
-        <div className="px-4 w-full flex flex-col gap-5">
-          {projects.map((project, index) => (
-            <ProjectCard key={index} {...project} />
+    <section id="projects" className={className}>
+      <div className="max-w-6xl py-8">
+        <h2 className="text-2xl uppercase font-bold mb-8 text-foreground">
+          Web Development Projects
+        </h2>
+
+        {/* Grid: 1 col mobile → 2 col md+ */}
+        <div className="flex flex-wrap justify-start gap-8 p-4">
+          {projects.map((project) => (
+            <ProjectCard key={project.id} {...project} />
           ))}
         </div>
       </div>

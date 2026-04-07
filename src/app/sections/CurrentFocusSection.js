@@ -13,7 +13,7 @@ const CurrentFocusSection = ({ className }) => {
 
   return (
     <section id="focus" className={`${className}`}>
-      <div className="px-4 max-w-6xl mx-auto">
+      <div className="px-4 max-w-6xl">
         <h2 className="text-3xl font-bold mb-8 text-foreground">Current Focus</h2>
         <div className="bg-background rounded-lg px-4">
           <div className="grid md:grid-cols-2 gap-8">

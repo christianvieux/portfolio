@@ -23,7 +23,7 @@ const AboutSection = ({ className }) => {
 
   return (
     <section id="about" className={`${className}`}>
-      <div className="px-4 max-w-6xl mx-auto">
+      <div className="px-4 max-w-6xl">
         <h2 className="text-3xl font-bold mb-8 text-foreground">About Me</h2>
         <div className="bg-background rounded-lg">
           <div className="px-4 text-foreground text-lg leading-relaxed mb-8">

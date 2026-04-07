@@ -1,9 +1,6 @@
 // components/GameProjectModal.js
 import {
     Modal,
-    ModalContent,
-    ModalHeader,
-    ModalBody,
   } from "@heroui/react";
   
   const GameProjectModal = ({ isOpen, onOpenChange, media, title }) => {
@@ -19,11 +16,11 @@ import {
           closeButton: "hover:bg-secondary text-secondary-foreground"
         }}
       >
-        <ModalContent>
+        <Modal.Container>
           {(onClose) => (
             <>
-              <ModalHeader>{title}</ModalHeader>
-              <ModalBody>
+              <Modal.Header>{title}</Modal.Header>
+              <Modal.Body>
                 <div className="aspect-video w-full">
                   {media.type === "video" ? (
                     <video 
@@ -39,10 +36,10 @@ import {
                     />
                   )}
                 </div>
-              </ModalBody>
+              </Modal.Body>
             </>
           )}
-        </ModalContent>
+        </Modal.Container>
       </Modal>
     );
   };

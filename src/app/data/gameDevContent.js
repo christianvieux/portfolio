@@ -1,6 +1,6 @@
 // data/gameDevContent.js
 export const gameDevContent = {
-  title: "Game Development Experience",
+  title: "GAME DEVELOPMENT EXPERIENCE",
   description: "Extensive experience in **ROBLOX** game development since **2013**, specializing in character mechanics, animations, and custom movement systems. Created numerous commissioned projects and demonstrations, showcasing expertise in **Lua programming** and game design principles. Additionally, I have worked with **Blender**, completing various commissions involving 3D modeling, rigging, and animations.",
   projects: [
     {

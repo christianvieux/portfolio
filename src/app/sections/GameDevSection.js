@@ -4,7 +4,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { gameDevContent } from "../data/gameDevContent";
 import GameProjectModal from "../components/GameProjectModal";
-import { useDisclosure } from "@heroui/react";
+import { useOverlayState } from "@heroui/react";
 import { Play, Image } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 
@@ -19,13 +19,13 @@ const GameDevSection = ({ className }) => {
 
   const [selectedMedia, setSelectedMedia] = useState(null);
   const [selectedTitle, setSelectedTitle] = useState("");
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onOpenChange } = useOverlayState();
 
   return (
     <section id="gamedev" className={`${className}`}>
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="max-w-6xl py-8">
         {/* Title */}
-        <h2 className="text-3xl font-bold mb-4 text-foreground">
+        <h2 className="text-2xl font-bold mb-4 text-foreground">
           {gameDevContent.title}
         </h2>
         <div id="content" className="px-4">

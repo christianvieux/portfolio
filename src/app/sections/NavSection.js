@@ -1,133 +1,187 @@
 // sections/NavSection.js
-import { Menu } from "lucide-react";
-import Link from "next/link";
-import { useState } from "react";
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-  Button,
-  Modal,
-  ModalContent,
-  ModalBody,
-  NavbarMenu,
-  NavbarMenuItem,
-  NavbarMenuToggle,
-} from "@heroui/react";
-import Switch from "../components/DarkModeSwitch";
-const NavSection = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    // Check if we're in the browser
-    if (typeof window !== "undefined") {
-      // Check localStorage first
-      const stored = localStorage.getItem("darkMode");
-      if (stored !== null) {
-        return JSON.parse(stored);
-      }
-      // Fall back to system preference
-      return window.matchMedia("(prefers-color-scheme: dark)").matches;
-    }
-    return true; // Default for SSR
-  });
-  const handleOpenModal = () => setIsModalOpen(true);
-  const handleCloseModal = () => setIsModalOpen(false);
+"use client";
 
-  const LinkItem = ({ href, label }) => (
-    <a
-      href={href}
-      className="text-foreground hover:text-primary-hover transition-colors"
+import { useState, useEffect, useRef } from "react";
+import { Menu, X } from "lucide-react";
+import DarkModeSwitch from "../components/DarkModeSwitch";
+
+// ─── Reusable nav link ────────────────────────────────────────────────────────
+const NavLink = ({ href, label, onClick }) => (
+  <a
+    href={href}
+    onClick={onClick}
+    className="text-foreground hover:text-primary transition-colors duration-200 text-sm font-medium"
+  >
+    {label}
+  </a>
+);
+
+// ─── Nav items config ─────────────────────────────────────────────────────────
+const NAV_LINKS = [
+  { href: "#",         label: "Home"     },
+  { href: "#projects", label: "Projects" },
+  { href: "#gamedev",  label: "Game Dev" },
+  { href: "#about",    label: "About"    },
+  { href: "#focus",    label: "Focus"    },
+  { href: "#contact",  label: "Contact"  },
+];
+
+// ─── Resume Modal (native — no HeroUI dependency) ─────────────────────────────
+const ResumeModal = ({ isOpen, onClose }) => {
+  // Close on Escape key
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKey = (e) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, [isOpen, onClose]);
+
+  // Lock body scroll while open
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+      onClick={onClose}
     >
-      {label}
-    </a>
-  );
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
 
-  const menuItems = [
-    {
-      component: (
-        <Switch
-          className="mr-7"
-          isDarkMode={isDarkMode}
-          setIsDarkMode={setIsDarkMode}
-        />
-      ),
-    },
-    { component: <LinkItem href="#" label="Home" /> },
-    { component: <LinkItem href="#projects" label="Projects" /> },
-    { component: <LinkItem href="#gamedev" label="Game Dev" /> },
-    { component: <LinkItem href="#about" label="About" /> },
-    { component: <LinkItem href="#focus" label="Focus" /> },
-    { component: <LinkItem href="#contact" label="Contact" /> },
-    {
-      component: (
+      {/* Dialog */}
+      <div
+        className="relative z-10 w-full max-w-5xl rounded-xl bg-background shadow-2xl overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Close button */}
         <button
-          onClick={handleOpenModal}
-          className="cursor-pointer text-foreground hover:text-primary-hover transition-colors"
+          onClick={onClose}
+          className="absolute top-3 right-3 z-20 p-1.5 rounded-md text-foreground hover:bg-secondary transition-colors cursor-pointer"
+          aria-label="Close"
         >
-          Resume
+          <X size={18} />
         </button>
-      ),
-    },
-  ];
+
+        <iframe
+          src="/resume.pdf"
+          className="w-full h-[calc(100vh-8rem)]"
+          title="Resume"
+        />
+      </div>
+    </div>
+  );
+};
+
+// ─── Main component ───────────────────────────────────────────────────────────
+const NavSection = () => {
+  const [isMenuOpen, setIsMenuOpen]   = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode]   = useState(() => {
+    if (typeof window === "undefined") return true;
+    console.log("mode is", window.matchMedia("(prefers-color-scheme: dark)").matches);
+    const stored = localStorage.getItem("darkMode");
+    if (stored !== null) return JSON.parse(stored);
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  });
+
+  const navRef = useRef(null);
+
+  // Close mobile menu on outside click
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+    if (isMenuOpen) document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isMenuOpen]);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isModalOpen) return; // modal handles its own scroll lock
+    document.body.style.overflow = isMenuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [isMenuOpen, isModalOpen]);
+
+  const closeMenu = () => setIsMenuOpen(false);
+
   return (
     <>
-      <Navbar maxWidth="full" onMenuOpenChange={setIsMenuOpen}>
-        <NavbarBrand>
-          <span className="mr-12 text-xl font-bold text-foreground">
-            Christian Vieux
-          </span>
-        </NavbarBrand>
-        <NavbarContent className="hidden nav:flex gap-4" justify="center">
-          {menuItems.map((item, index) => (
-            <NavbarItem key={index}>{item.component}</NavbarItem>
-          ))}
-        </NavbarContent>
-
-        {/* Menu Toggle */}
-        <NavbarContent justify="end" className="nav:hidden">
-          <NavbarMenuToggle
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            className="cursor-pointer w-auto"
-            icon={isMenuOpen ? "Close Menu" : "Open Menu"}
-          ></NavbarMenuToggle>
-        </NavbarContent>
-
-        {/* Menu Items*/}
-        {isMenuOpen &&
-          ((
-            <NavbarMenu>
-              {/* Items */}
-              {menuItems.map((item, index) => (
-                <NavbarMenuItem key={index}>{item.component}</NavbarMenuItem>
-              ))}
-            </NavbarMenu>
-          ) || <></>)}
-      </Navbar>
-
-      {/* Resume Modal */}
-      <Modal
-        isOpen={isModalOpen}
-        onOpenChange={handleCloseModal}
-        size="4xl"
-        classNames={{
-          base: "bg-background",
-          closeButton: "hover:bg-secondary text-secondary-foreground",
-        }}
+      {/* ── Navbar ── */}
+      <nav
+        ref={navRef}
+        className="
+          fixed top-0 left-0 right-0 z-50
+          bg-background/80 backdrop-blur-md
+          border-b border-accent/20
+          transition-colors duration-300
+          max-w-screen
+        "
       >
-        <ModalContent>
-          {(onClose) => (
-            <ModalBody className="p-0">
-              <iframe
-                src="/resume.pdf"
-                className="w-full h-[calc(100vh-8rem)]"
-                title="Resume"
-              />
-            </ModalBody>
-          )}
-        </ModalContent>
-      </Modal>
+        <div className="w-full mx-auto px-6 h-16 flex items-center justify-between">
+
+          {/* Brand */}
+          <span className="text-xl font-bold text-foreground tracking-wide select-none">
+            CV
+          </span>
+
+          {/* Desktop links — hidden below 950px */}
+          <div className="hidden nav:flex items-center gap-6">
+            {NAV_LINKS.map((link) => (
+              <NavLink key={link.href} {...link} />
+            ))}
+
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="text-sm font-medium text-foreground hover:text-primary transition-colors duration-200 cursor-pointer"
+            >
+              Resume
+            </button>
+
+            <DarkModeSwitch isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+          </div>
+
+          {/* Mobile toggle — visible below 950px */}
+          <button
+            className="nav:hidden p-2 rounded-md text-foreground hover:bg-secondary-hover transition-colors duration-200 cursor-pointer"
+            onClick={() => setIsMenuOpen((prev) => !prev)}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          >
+            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
+
+        {/* Mobile menu drawer */}
+        {isMenuOpen && (
+          <div className="nav:hidden border-t border-accent/20 bg-background px-6 py-4 flex flex-col gap-4">
+            {NAV_LINKS.map((link) => (
+              <NavLink key={link.href} {...link} onClick={closeMenu} />
+            ))}
+
+            <button
+              onClick={() => { setIsModalOpen(true); closeMenu(); }}
+              className="text-sm font-medium text-left text-foreground hover:text-primary transition-colors duration-200 cursor-pointer"
+            >
+              Resume
+            </button>
+
+            <div className="pt-1">
+              <DarkModeSwitch isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+            </div>
+          </div>
+        )}
+      </nav>
+
+      {/* Spacer so page content sits below the fixed navbar */}
+      <div className="h-16" />
+
+      {/* ── Resume Modal ── */}
+      <ResumeModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );
 };

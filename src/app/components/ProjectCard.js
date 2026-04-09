@@ -1,106 +1,216 @@
 // components/ProjectCard.js
-import { useDisclosure } from "@heroui/react";
-import Image from "next/image";
-import ProjectModal from "./ProjectModal";
-import { ExternalLink, PlayIcon } from "lucide-react";
-import ReactMarkdown from "react-markdown";
 
-const ProjectCard = (project) => {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const { title, summary, image, technologies, period } = project;
+'use client'
 
-  return (
-    <>
-      <div
-        id="project-card"
-        onClick={onOpen}
-        className="group bg-secondary rounded-lg shadow-sm p-6 cursor-pointer 
-        hover:shadow-lg hover:scale-[1.01] 
-        transition-all duration-200 ease-in-out
-        relative hover:before:opacity-100 before:absolute before:inset-0 before:bg-background/80 before:opacity-0 before:transition-opacity before:duration-200 before:rounded-lg before:z-10"
-      >
-        {/* External Link */}
-        <div className="absolute top-4 right-4 text-primary-hover opacity-0 group-hover:opacity-100 transition-opacity z-30">
-          <ExternalLink className="w-5 h-5" />
+import Image from 'next/image'
+import Chip from './Chip'
+import Link from 'next/link'
+import Separator from './Seperator'
+import { Button } from '@heroui/react'
+import { Globe, Github, Video } from 'lucide-react'
+
+// ─── Meta row — handles solo vs team ─────────────────────────────────────────
+
+const MetaRow = ({ stats, eyebrow }) => {
+    const isTeam = eyebrow.type === 'team'
+
+    return (
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-muted-foreground">
+            <span>{stats.year}</span>
+            <span className="text-muted-foreground/40">/</span>
+
+            {isTeam ? (
+                <span>Team project</span>
+            ) : (
+                <span>Solo project</span>
+            )}
+
+            {stats.highlight && (
+                <>
+                    <span className="text-muted-foreground/40">/</span>
+                    <span className="font-medium text-foreground">
+                        {stats.highlight}
+                    </span>
+                </>
+            )}
         </div>
+    )
+}
 
-        {/* Project Content */}
-        <div className="flex flex-col md:flex-row md:space-x-6">
-          <div
-            className="border-4 border-primary/10 relative w-full md:w-2/6 h-52 mb-4 md:mb-0 rounded-lg overflow-hidden flex-shrink-0
-            transition-all"
-          >
-            {image ? (
-              <Image
+// ─── Thumbnail ────────────────────────────────────────────────────────────────
+
+const Thumbnail = ({ image, title }) => (
+    <div className="relative aspect-video w-full rounded-lg border-primary/10 bg-background/30">
+        {image ? (
+            <Image
                 src={image}
                 alt={title}
                 fill
-                className="object-fill"
-                sizes="(max-width: 768px) 100vw, 40vw"
-              />
-            ) : (
-              <div className="w-full h-full bg-secondary flex items-center justify-center">
-                <span className="text-secondary-foreground">
-                  No preview available
+                className="m-auto !h-max max-h-[90%] !w-max max-w-[90%] rounded-sm border-3 border-primary/40 object-contain"
+            />
+        ) : (
+            <div className="flex h-full w-full items-center justify-center">
+                <span className="text-xs text-muted-foreground">
+                    No preview
                 </span>
-              </div>
-            )}
-          </div>
-
-          <div className="flex-1 flex flex-col gap-2">
-            <h3 className="text-xl font-semibold text-foreground group-hover:text-primary-hover transition-colors">
-              {title}
-            </h3>
-            {period && <span className="text-sm text-primary">{period}</span>}
-            <div className="text-foreground mb-4 line-clamp-2 flex-grow">
-              <ReactMarkdown>{summary}</ReactMarkdown>
             </div>
+        )}
+    </div>
+)
 
-            <div className="flex flex-wrap gap-2">
-              {technologies.slice(0, 3).map((tech, index) => (
-                <span
-                  key={index}
-                  className="px-3 py-1 bg-accent text-accent-foreground rounded-full text-sm
-                     transition-colors"
-                >
-                  {tech}
-                </span>
-              ))}
-              {technologies.length > 3 && (
-                <span
-                  className="px-3 py-1 bg-accent text-accent-foreground rounded-full text-sm
-                  transition-colors"
-                >
-                  +{technologies.length - 3}
-                </span>
-              )}
-              {/* Demo Video Indicator */}
-              {project.demo && (
-                <span className="px-2 py-1 bg-accent text-accent-foreground rounded-full text-xs font-medium flex items-center gap-1 flex-shrink-0">
-                  <PlayIcon className="fill-current h-4" />
-                  <span className="hidden sm:inline">Demo Video</span>
-                  <span className="sm:hidden">Demo</span>
-                </span>
-              )}
+// ─── Tech chips row — max 3 visible + overflow count ─────────────────────────
+
+const TechRow = ({ tech }) => (
+    <div className="flex flex-wrap gap-1.5">
+        {tech.slice(0, 3).map((t) => (
+            <Chip
+                key={t.name}
+                label={t.name}
+                icon={t.icon}
+                variant={t.variant || 'tag-a'}
+            />
+        ))}
+
+        {tech.length > 3 && (
+            <Chip label={`+${tech.length - 3}`} variant="tag-a" />
+        )}
+    </div>
+)
+
+// ─── Main card ────────────────────────────────────────────────────────────────
+
+const ProjectCard = ({
+    id,
+    thumbnail,
+    card,
+    meta,
+    demo,
+    tech,
+    className = '',
+    onOpenModal = () => {
+        console.warn('onOpenModal not passed on ProjectCard')
+    },
+    ...props
+}) => {
+    const { title, description, solves, stats, badges, eyebrow } = card
+
+    const handleOpen = () => onOpenModal?.(id)
+
+    return (
+        <>
+            <div
+                className={`relative flex w-full max-w-xs flex-col rounded-lg border-2 border-primary/40 bg-secondary transition-all duration-200 ease-in-out ${className} `}
+                {...props}
+            >
+                {/* Thumbnail */}
+                <Thumbnail image={thumbnail} title={title} />
+
+                {/* Body */}
+                <div className="flex min-h-0 flex-1 flex-col gap-2.5 p-4">
+                    {/* Row: title + badges */}
+                    <div className="flex justify-between gap-3">
+                        <h3 className="text-md leading-snug font-semibold text-foreground transition-colors">
+                            {title}
+                        </h3>
+                        <div className="flex flex-wrap items-center gap-1.5">
+                            {badges.featured && (
+                                <Chip
+                                    label="Featured"
+                                    variant="status-featured"
+                                    dot
+                                />
+                            )}
+                            {badges.live && (
+                                <Chip label="Live" variant="status-live" dot />
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Description */}
+                    <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+                        {description}
+                    </p>
+
+                    {/* Solves */}
+                    {solves && (
+                        <p className="text-[11px] text-muted-foreground italic">
+                            Solves: {solves}
+                        </p>
+                    )}
+
+                    {/* Meta */}
+                    <MetaRow stats={stats} eyebrow={eyebrow} />
+
+                    {/* Footer: chips + links */}
+                    <div className="mt-auto flex flex-col justify-between gap-3 pt-1">
+                        <TechRow tech={tech} />
+
+                        {/* Separator */}
+                        <div className="flex items-center gap-2 text-muted-foreground opacity-50">
+                            <Separator className="flex-1" />
+                            <p className="text-sm whitespace-nowrap">Links</p>
+                            <Separator className="flex-1" />
+                        </div>
+
+                        {/* Action links */}
+                        {meta?.links && (
+                            <div
+                                className="flex items-center gap-4"
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                                {meta.links.live && (
+                                    <Link
+                                        href={meta.links.live}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        <Chip
+                                            label="Live"
+                                            icon={Globe}
+                                            variant="link"
+                                            rawIcon
+                                        />
+                                    </Link>
+                                )}
+                                {meta.links.github && (
+                                    <Link
+                                        href={meta.links.github}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        <Chip
+                                            label="Code"
+                                            icon={Github}
+                                            variant="link"
+                                            rawIcon
+                                        />
+                                    </Link>
+                                )}
+                                {/* Modal Video trigger */}
+                                {demo && (
+                                    <Button
+                                        size="sm"
+                                        variant="ghost"
+                                        className={'p-0 hover:bg-transparent'}
+                                        onClick={handleOpen}
+                                    >
+                                        <Chip
+                                            label="Demo"
+                                            icon={Video}
+                                            variant="link"
+                                            rawIcon
+                                        />
+                                    </Button>
+                                )}
+                            </div>
+                        )}
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
+        </>
+    )
+}
 
-        {/* View more details overlay */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-20 pointer-events-none">
-          <span className="text-primary-hover font-semibold text-lg px-4 py-2 rounded-lg">
-            View more details
-          </span>
-        </div>
-      </div>
-
-      <ProjectModal
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        project={project}
-      />
-    </>
-  );
-};
-
-export default ProjectCard;
+export default ProjectCard

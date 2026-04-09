@@ -1,0 +1,123 @@
+/* Import Tailwindcss && Hero UI styles*/
+@import 'tailwindcss';
+@import '@heroui/styles';
+
+/* Tailwind CSS */
+@layer theme, base, components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/preflight.css' layer(base);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+/* Dark Variant */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* DARK THEME */
+/* @media (prefers-color-scheme: dark)*/
+.dark {
+    /* :root { */
+    --color-background: #0c0509; /** page background */
+    --color-foreground: #ffffff; /** main text, links */
+    --color-primary: #9b7ebd; /** buttons, links, highlights */
+    --color-primary-hover: #c7aedd; /** hover for buttons/links */
+    --color-secondary: #1b1a28; /** cards, modals, sections */
+    --color-secondary-hover: #2b2639; /** hover bg for cards or buttons */
+    --color-secondary-foreground: #d4bee4; /** text/icons on cards or modals */
+    --color-accent: #d4bee4; /** tags, pills, outlines, borders */
+    --color-accent-foreground: #3b1e54; /** text/icons inside tags/pills */
+    --color-muted: #1e1a25; /** disabled bg, dividers, subtle areas */
+    --color-muted-foreground: #a1a1aa; /** disabled/help text, placeholders */
+
+    /* Success / Warning / Error */
+    --color-success: #4ade80;
+    --color-success-hover: #22c55e;
+    --color-success-foreground: #052e16;
+
+    /* Tags */
+    --color-tag-b: #7abfb3;
+    --color-tag-b-bg: #7abfb31a;
+    --color-tag-b-border: #7abfb34d;
+
+    --color-tag-c: #c4a96b;
+    --color-tag-c-bg: #c4a96b1a;
+    --color-tag-c-border: #c4a96b4d;
+
+    /* Shadow Card */
+    --shadow-card:
+        0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3); /** card/drop shadow */
+    /* } */
+}
+
+/* LIGHT THEME */
+@theme {
+    --color-background: #f4f5f7; /* page background */
+    --color-foreground: #111318; /* main text, links */
+    --color-primary: #6b4fa8; /* buttons, links, highlights */
+    --color-primary-hover: #3d2b72; /* hover for buttons/links */
+    --color-secondary: #ffffff; /* cards, modals, sections */
+    --color-secondary-hover: #eceef2; /* hover bg for cards or buttons */
+    --color-secondary-foreground: #252830; /* text/icons on cards or modals */
+    --color-accent: #a899ce; /* tags, pills, outlines, borders */
+    --color-accent-foreground: #ffffff; /* text/icons inside tags/pills */
+    --color-muted: #eceef2; /* disabled bg, dividers, subtle areas */
+    --color-muted-foreground: #6b7080; /* disabled/help text, placeholders */
+    /* Success / Warning / Error */
+    --color-success: #4caf7d;
+    --color-success-hover: #3e9b6c;
+    --color-success-foreground: #ffffff;
+    /* Tags */
+    --color-tag-b: #3d7a70;
+    --color-tag-b-bg: #3d7a701a;
+    --color-tag-b-border: #3d7a704d;
+    --color-tag-c: #8a6e2f;
+    --color-tag-c-bg: #8a6e2f1a;
+    --color-tag-c-border: #8a6e2f4d;
+    /* Card shadow */
+    --shadow-card:
+        0 1px 3px 0 rgb(0 0 0 / 0.08), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+
+    /* Custom breakpoint */
+    --breakpoint-nav: 950px;
+}
+
+/* Giving smooth changes to colors */
+:root,
+.dark {
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+body {
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+/* smooth scrolling behavior (added for the nav bar buttons) */
+html {
+  scroll-behavior: smooth;
+}
+
+
+/* Define custom utilities */
+@layer utilities {
+    .fade-in {
+        animation: fadeIn 0.5s ease-out forwards;
+    }
+}
+
+/* Define custom components */
+@layer components {
+    .card {
+        box-shadow: var(--shadow-card);
+    }
+}
+
+/* This styling is for the react-markdown */
+@layer base {
+    strong,
+    b {
+        @apply font-semibold text-[color:var(--color-primary)];
+    }
+}

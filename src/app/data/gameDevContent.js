@@ -1,15 +1,14 @@
 // data/gameDevContent.js
 export const gameDevContent = {
     title: 'GAME DEVELOPMENT EXPERIENCE',
-    description:
-        'Extensive experience in **ROBLOX** game development since **2013**, specializing in character mechanics, animations, and custom movement systems. Created numerous commissioned projects and demonstrations, showcasing expertise in **Lua programming** and game design principles. Additionally, I have worked with **Blender**, completing various commissions involving 3D modeling, rigging, and animations.',
+    description: `Background in game development focused on building **interactive systems**, **animations**, and custom mechanics. Developed **character movement systems**, **state-based animations**, and gameplay features using **Lua**, with a strong emphasis on performance and user experience. Delivered commissioned projects, collaborating with clients to turn ideas into fully functional systems. Also worked with **Blender** to create and rig 3D assets, supporting end-to-end development from concept to implementation.`,
     projects: [
         {
             title: 'Monster Animation System',
             period: 'Apr 2023',
             role: 'Animator',
             description:
-                'Commissioned work featuring actions for fantasy creatures. Created animations for a Goblin throwing rocks and a Troll swinging a tree log',
+                'Commissioned animation work for fantasy characters, including actions like throwing and heavy weapon swings. Focused on creating smooth, responsive animations that align with in-game interactions.',
             media: {
                 type: 'image',
                 url: '/images/monster-animation.mp4',
@@ -34,7 +33,7 @@ export const gameDevContent = {
             period: 'Apr 2023',
             role: 'Scripter',
             description:
-                'Implemented state-based animations including idle, walking, running, and jumping. Developed custom vehicle-like movement mechanics',
+                'Implemented a state-based movement system with animations for idle, walking, running, and jumping. Developed custom movement behavior to achieve smooth transitions and responsive controls.',
             media: {
                 type: 'video',
                 url: '/videos/horse-movement.mp4',
@@ -59,7 +58,7 @@ export const gameDevContent = {
             period: 'Sep 2022',
             role: 'Scripter & Animator',
             description:
-                'I developed a custom character movement system for a dog as part of a commission, including crouching, sprinting, and swimming mechanics. This included designing the animations, rigging, and programming the movement controls',
+                'Built a custom movement system for a custom character, including crouching, sprinting, and swimming mechanics. Handled both animation and scripting to ensure smooth transitions and responsive behavior.',
             media: {
                 type: 'image',
                 thumbnail:
@@ -90,41 +89,6 @@ export const gameDevContent = {
                     name: 'Sniff Animation',
                     type: 'video',
                     url: 'https://res.cloudinary.com/dqbydfphk/video/upload/v1739083339/ot8os2e38jx64e2dbeh1.mp4',
-                },
-            ],
-        },
-        {
-            title: 'Character Movement System',
-            period: 'Oct 2022',
-            role: 'Scripter',
-            description:
-                'Developed comprehensive character movement including ragdoll physics, walking/running states, and camera effects',
-            media: {
-                type: 'image',
-                url: '/videos/character-movement.mp4',
-                thumbnail:
-                    'https://res.cloudinary.com/dqbydfphk/image/upload/v1739083627/Movement_Thumbnail_y2wxew.png',
-            },
-            attachments: [
-                {
-                    name: 'Preview ',
-                    type: 'video',
-                    url: 'https://res.cloudinary.com/dqbydfphk/video/upload/v1739085512/Movement_Preview_2_sj5vaf.mp4',
-                },
-                {
-                    name: 'Combat Preview',
-                    type: 'video',
-                    url: 'https://res.cloudinary.com/dqbydfphk/video/upload/v1739083446/r00xq8asgbkeulrdry7n.mp4',
-                },
-                {
-                    name: 'Floor Material Preview',
-                    type: 'video',
-                    url: 'https://res.cloudinary.com/dqbydfphk/video/upload/v1739083533/qemk7bpoqhluyoezjmcq.mp4',
-                },
-                {
-                    name: 'Ragdoll & Fall Damage Preview',
-                    type: 'video',
-                    url: 'https://res.cloudinary.com/dqbydfphk/video/upload/v1739083436/wsampjzxzvry1fxfb4sk.mp4',
                 },
             ],
         },

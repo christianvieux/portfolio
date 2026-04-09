@@ -8,8 +8,9 @@ export default function Separator({
     return (
         <>
             <HeroSeparator
+                orientation={orientation}
                 variant="tertiary"
-                className={`bg-muted-foreground/25 ${orientation === 'horizontal' ? 'h-[2px]' : 'w-[2px]'} ${className}`}
+                className={`bg-muted-foreground/30 ${orientation === 'horizontal' ? 'block h-px w-full' : 'block h-full w-px'} ${className}`}
                 {...props}
             />
         </>

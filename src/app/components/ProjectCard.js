@@ -2,14 +2,12 @@
 
 'use client'
 
-import { useOverlayState, Button } from '@heroui/react'
 import Image from 'next/image'
-import { ExternalLink } from 'lucide-react'
-import ProjectModal from './ProjectModal'
 import Chip from './Chip'
-import { Globe, Github, Info } from 'lucide-react'
 import Link from 'next/link'
 import Separator from './Seperator'
+import { Button } from '@heroui/react'
+import { Globe, Github, Video } from 'lucide-react'
 
 // ─── Meta row — handles solo vs team ─────────────────────────────────────────
 
@@ -22,11 +20,7 @@ const MetaRow = ({ stats, eyebrow }) => {
             <span className="text-muted-foreground/40">/</span>
 
             {isTeam ? (
-                <>
-                    <span>Team of {eyebrow.teamSize}</span>
-                    <span className="text-muted-foreground/40">/</span>
-                    <Chip label={eyebrow.role} variant="status-featured" />
-                </>
+                <span>Team project</span>
             ) : (
                 <span>Solo project</span>
             )}
@@ -52,7 +46,7 @@ const Thumbnail = ({ image, title }) => (
                 src={image}
                 alt={title}
                 fill
-                className="m-auto !h-max max-h-[90%] max-w-[90%] rounded-sm border-3 border-primary/40 object-contain"
+                className="m-auto !h-max max-h-[90%] !w-max max-w-[90%] rounded-sm border-3 border-primary/40 object-contain"
             />
         ) : (
             <div className="flex h-full w-full items-center justify-center">
@@ -85,18 +79,31 @@ const TechRow = ({ tech }) => (
 
 // ─── Main card ────────────────────────────────────────────────────────────────
 
-const ProjectCard = ({ card, modal, meta, tech }) => {
-    const { isOpen, onOpen, onOpenChange } = useOverlayState()
-    const { title, description, solves, stats, badges, image, eyebrow } = card
+const ProjectCard = ({
+    id,
+    thumbnail,
+    card,
+    meta,
+    demo,
+    tech,
+    className = '',
+    onOpenModal = () => {
+        console.warn('onOpenModal not passed on ProjectCard')
+    },
+    ...props
+}) => {
+    const { title, description, solves, stats, badges, eyebrow } = card
+
+    const handleOpen = () => onOpenModal?.(id)
 
     return (
         <>
             <div
-                onClick={onOpen}
-                className="relative flex w-full max-w-xs flex-col rounded-lg border-2 border-primary/40 bg-secondary transition-all duration-200 ease-in-out"
+                className={`relative flex w-full max-w-xs flex-col rounded-lg border-2 border-primary/40 bg-secondary transition-all duration-200 ease-in-out ${className} `}
+                {...props}
             >
                 {/* Thumbnail */}
-                <Thumbnail image={image} title={title} />
+                <Thumbnail image={thumbnail} title={title} />
 
                 {/* Body */}
                 <div className="flex min-h-0 flex-1 flex-col gap-2.5 p-4">
@@ -161,7 +168,7 @@ const ProjectCard = ({ card, modal, meta, tech }) => {
                                         <Chip
                                             label="Live"
                                             icon={Globe}
-                                            variant="link-primary"
+                                            variant="link"
                                             rawIcon
                                         />
                                     </Link>
@@ -176,36 +183,32 @@ const ProjectCard = ({ card, modal, meta, tech }) => {
                                         <Chip
                                             label="Code"
                                             icon={Github}
-                                            variant="link-secondary"
+                                            variant="link"
                                             rawIcon
                                         />
                                     </Link>
                                 )}
-                                {/* Modal trigger */}
-                                <Button
-                                    size="sm"
-                                    variant="ghost"
-                                    className={'p-0'}
-                                    onClick={onOpen}
-                                >
-                                    <Chip
-                                        label="More Details"
-                                        icon={Info}
-                                        variant="link-secondary"
-                                        rawIcon
-                                    />
-                                </Button>
+                                {/* Modal Video trigger */}
+                                {demo && (
+                                    <Button
+                                        size="sm"
+                                        variant="ghost"
+                                        className={'p-0 hover:bg-transparent'}
+                                        onClick={handleOpen}
+                                    >
+                                        <Chip
+                                            label="Demo"
+                                            icon={Video}
+                                            variant="link"
+                                            rawIcon
+                                        />
+                                    </Button>
+                                )}
                             </div>
                         )}
                     </div>
                 </div>
             </div>
-
-            <ProjectModal
-                isOpen={isOpen}
-                onOpenChange={onOpenChange}
-                project={{ card, modal, meta }}
-            />
         </>
     )
 }

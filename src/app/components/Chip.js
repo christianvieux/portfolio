@@ -23,18 +23,13 @@ const VARIANT_STYLES = {
         text: 'text-success',
     },
     'status-featured': {
-        bg: 'bg-primary/10',
-        border: 'border-primary/30',
-        text: 'text-primary',
+        bg: 'bg-tag-c-bg',
+        border: 'border-tag-c-border',
+        text: 'text-tag-c',
     },
-    'link-primary': {
-        bg: 'bg-primary/15',
-        border: 'border-primary/40',
-        text: 'text-primary',
-    },
-    'link-secondary': {
-        bg: 'bg-transparent',
-        border: 'border-primary/20',
+    link: {
+        bg: 'bg-muted/30',
+        border: 'border-muted-foreground/40',
         text: 'text-muted-foreground',
     },
     default: {

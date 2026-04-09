@@ -1,406 +1,271 @@
 // data/projectsContent.js
 
-import { image } from '@heroui/react'
-
-// Icons
+import ExpressIcon from '../Icons/Express.js'
+import MongoDBIcon from '../Icons/MongoDB.js'
+import DjangoIcon from '../Icons/DjangoREST.js'
+import PythonIcon from '../Icons/Python.js'
+import NextIcon from '../Icons/Nextjs.js'
+import HTMLIcon from '../Icons/HTML5.js'
+import JSIcon from '../Icons/JavaScript.js'
+import TailwindIcon from '../Icons/TailwindCSS.js'
+import BootstrapIcon from '../Icons/BootStrap.js'
+import GitIcon from '../Icons/Git.js'
+import GithubIcon from '../Icons/GitHub.js'
+import VercelIcon from '../Icons/Vercel.js'
+import DockerIcon from '../Icons/Docker.js'
+import ReactIcon from '../Icons/React.js'
+import NodejsIcon from '../Icons/Nodejs.js';
+import PostgresSQLIcon from '../Icons/PostgresSQL.js'
 import AWSIcon from '../Icons/AWS.js'
 import DotNetIcon from '../Icons/DotNet.js'
-import ReactIcon from '../Icons/React.js'
-import PostgresSQLIcon from '../Icons/PostgresSQL.js'
+
+const tech = (name, icon, variant, category) => ({
+    name,
+    icon,
+    variant,
+    category,
+})
+
+const project = ({ id, thumbnail, card, meta, tech = [], modal, demo }) => ({
+    id,
+    thumbnail,
+    card,
+    meta,
+    tech,
+    ...(modal && { modal }),
+    ...(demo && { demo }),
+})
 
 export const projects = [
-    // File sharing project
-    {
-        id: 'file-sharing-2',
-
+    project({
+        id: 'trackfusionweb',
+        thumbnail:
+            'https://res.cloudinary.com/dqbydfphk/image/upload/v1739083627/TrackFusionWeb_Thumbnail_ce0rsv.png',
         card: {
             eyebrow: {
                 type: 'solo',
                 label: 'Solo project',
                 teamSize: null,
-                role: null,
             },
-            title: 'File Sharing App',
+            title: 'TrackFusionWeb',
             description:
-                'Secure file-sharing with expiring links and AWS-backed storage.',
-            solves: 'secure sharing with granular access control',
+                'Music platform for uploading, streaming, and managing tracks.',
+            solves: 'sharing and managing music in one place',
             stats: {
-                year: '2025',
+                year: '2024',
                 context: 'Solo project',
-                highlight: '~200 uploads/day',
+                highlight: 'Audio processing and storage flow',
             },
             badges: {
                 featured: true,
                 live: true,
             },
-            image: 'https://res.cloudinary.com/dqbydfphk/image/upload/v1748972079/Portfolio/ctyk94f2ctcgk6hzlfmq.jpg',
         },
-
+        meta: {
+            completedAt: '2024-12-30',
+            developmentPeriod: 'May 10 2023 to Dec 30 2024',
+            links: {
+                live: 'https://trackfusionweb.vercel.app/home',
+                github: 'https://github.com/christianvieux/TrackFusion-Frontend',
+            },
+        },
         modal: {
-            summary:
-                'Secure file-sharing application that lets users upload and share files through a web interface.',
             description:
-                'Built this tool to give users a secure way to upload files, manage access, and share them through a clean interface. Uses .NET Core for backend file handling and React for the frontend, with AWS powering storage and security-related services.',
+                'Built a music platform where users can upload tracks, manage audio content, and stream music through a responsive interface. Used Next.js for the frontend, Node.js and Express for the backend, PostgreSQL for data storage, and AWS for media storage and delivery.',
             features: [
-                'Secure file upload and storage using AWS S3',
-                'User authentication and file access control',
-                'Responsive web interface for easy file management',
-                'Simple sharing functionality with access controls',
-                'Cloud-based storage with AWS integration',
-            ],
-            libraries: [
-                {
-                    category: 'UI',
-                    items: ['React', 'TailwindCSS', 'Material UI'],
-                },
-                {
-                    category: 'Core Functionality',
-                    items: ['Axios', 'JWT', 'React Router'],
-                },
-                {
-                    category: 'Backend Services',
-                    items: [
-                        '.NET Core Web API',
-                        'Entity Framework Core',
-                        'AWS SDK',
-                    ],
-                },
-            ],
-            infrastructure: [
-                {
-                    category: 'AWS Services',
-                    items: [
-                        'S3 for file storage',
-                        'DynamoDB for metadata',
-                        'IAM for security management',
-                    ],
-                },
-                {
-                    category: 'Security',
-                    items: [
-                        'JWT authentication',
-                        'File access control',
-                        'Secure file transfer',
-                    ],
-                },
+                'Upload and manage audio content',
+                'Stream tracks with playback controls',
+                'Filter and search uploaded music',
+                'Manage personal music libraries',
+                'Use cloud storage for audio delivery',
             ],
         },
+        demo: {
+            url: 'https://christianvieux-public-files.s3.us-east-1.amazonaws.com/videos/Demo_Video_trackfusionweb.mp4',
+            timestamps: [
+                { time: '00:00', label: 'Project Overview and Tech Stack' },
+                { time: '01:18', label: 'Homepage and Navigation' },
+                { time: '02:00', label: 'Account Creation Process' },
+                { time: '03:03', label: 'Feed Page and Track Listing' },
+                { time: '04:04', label: 'Queue System and Playback Controls' },
+                { time: '05:16', label: 'Track Filtering and Search' },
+                { time: '06:39', label: 'Track Upload Demonstration' },
+                { time: '08:28', label: 'Account Settings and Wrap up' },
+            ],
+        },
+        tech: [
+            tech('Vercel', VercelIcon, 'tag-c', 'cloud'),
+            tech('Next.js', NextIcon, 'tag-a', 'frontend'),
+            tech('React', ReactIcon, 'tag-a', 'frontend'),
+            tech('Node.js', NodejsIcon, 'tag-b', 'backend'),
+            tech('Express', ExpressIcon, 'tag-b', 'backend'),
+            tech('PostgreSQL', PostgresSQLIcon, 'tag-b', 'database'),
+            tech('AWS', AWSIcon, 'tag-c', 'cloud'),
+            tech('Docker', DockerIcon, 'tag-c', 'cloud'),
+        ],
+    }),
 
+    project({
+        id: 'file-sharing',
+        thumbnail:
+            'https://res.cloudinary.com/dqbydfphk/image/upload/v1748972079/Portfolio/ctyk94f2ctcgk6hzlfmq.jpg',
+        card: {
+            eyebrow: {
+                type: 'solo',
+                label: 'Solo project',
+                teamSize: null,
+            },
+            title: 'File Sharing App',
+            description:
+                'Secure file sharing app with expiring links and AWS backed storage.',
+            solves: 'secure file sharing with controlled access',
+            stats: {
+                year: '2025',
+                context: 'Solo project',
+                highlight: 'Temporary access link system',
+            },
+            badges: {
+                featured: false,
+                live: true,
+            },
+        },
         meta: {
             completedAt: '2025-05-21',
-            developmentPeriod: 'May 9 2025 - May 21 2025',
+            developmentPeriod: 'May 9 2025 to May 21 2025',
             links: {
                 live: 'https://files.projects.christianvieuxdev.com',
-                github: 'https://github.com/christianvieux/GA_Project_Final_File-Sharing-App',
+                github: 'https://github.com/christianvieux/file-sharing-frontend',
             },
         },
-
         tech: [
-            {
-                name: 'React',
-                icon: ReactIcon,
-                variant: 'tag-a',
-                category: 'frontend',
-            },
-            {
-                name: '.NET Core',
-                icon: DotNetIcon,
-                variant: 'tag-b',
-                category: 'backend',
-            },
-            {
-                name: 'AWS',
-                icon: AWSIcon,
-                variant: 'tag-c',
-                category: 'cloud',
-            },
-            {
-                name: 'PostgreSQL',
-                icon: PostgresSQLIcon,
-                variant: 'tag-b',
-                category: 'database',
-            },
+            tech('React', ReactIcon, 'tag-a', 'frontend'),
+            tech('.NET Core', DotNetIcon, 'tag-b', 'backend'),
+            tech('PostgreSQL', PostgresSQLIcon, 'tag-b', 'database'),
+            tech('AWS', AWSIcon, 'tag-c', 'cloud'),
+            tech('Docker', DockerIcon, 'tag-c', 'cloud'),
         ],
-    },
+    }),
 
-    // ChapterList book tracking Project
-    // {
-    //   period: "May 6 2025",
-    //   title: "ChapterList",
-    //   summary:
-    //     "**Full-stack reading tracker** built by a team of 4 developers. Features a **responsive interface** for managing books and reviews, with user authentication and cloud deployment.",
-    //   description:
-    //     "Built during a team collaboration at **General Assembly** bootcamp. Created with **React** frontend and **Django** backend, allowing users to track their reading materials and share reviews. Led the **AWS deployment** and infrastructure setup as part of the backend team.",
-    //   features: [
-    //     "Browse and search reading materials collection",
-    //     "Create and manage reading lists",
-    //     "Review system with ratings and comments",
-    //     "Staff picks section for recommendations",
-    //     "Mobile-responsive interface design",
-    //   ],
-    //   image:
-    //     "https://res.cloudinary.com/dqbydfphk/image/upload/v1748974579/Portfolio/km8uqjtm5kwy3bbpjo0v.jpg",
-    //   technologies: ["React", "Django", "PostgreSQL", "AWS"],
-    //   frontend: ["React", "Vite", "CSS"],
-    //   backend: ["Django", "Python", "PostgreSQL"],
-    //   libraries: [
-    //     {
-    //       category: "Frontend",
-    //       items: [
-    //         "React for UI components",
-    //         "Axios for API requests",
-    //         "React Router for navigation",
-    //       ],
-    //     },
-    //     {
-    //       category: "Backend",
-    //       items: [
-    //         "Django REST Framework",
-    //         "Django ORM for database operations",
-    //         "JWT for authentication",
-    //       ],
-    //     },
-    //   ],
-    //   infrastructure: [
-    //     {
-    //       category: "Deployment",
-    //       items: [
-    //         "AWS EC2 for hosting",
-    //         "PostgreSQL database",
-    //         "Nginx web server",
-    //       ],
-    //     },
-    //     {
-    //       category: "Development",
-    //       items: [
-    //         "Git version control",
-    //         "Environment configuration",
-    //         "Team collaboration tools",
-    //       ],
-    //     },
-    //   ],
-    //   developmentPeriod: "April 29 2025 - May 6 2025",
-    //   liveLink: "https://reading.projects.christianvieuxdev.com",
-    //   githubLink: "https://github.com/christianvieux/GA_Project_4_ChapertList",
-    // },
+    project({
+        id: 'chapterlist',
+        thumbnail:
+            'https://res.cloudinary.com/dqbydfphk/image/upload/v1748974579/Portfolio/km8uqjtm5kwy3bbpjo0v.jpg',
+        card: {
+            eyebrow: {
+                type: 'team',
+                label: 'Team project',
+                teamSize: 4,
+            },
+            title: 'ChapterList',
+            description:
+                'Book tracking app for managing reading lists, reviews, and recommendations.',
+            solves: 'tracking books and sharing reviews',
+            stats: {
+                year: '2025',
+                context: 'Team of 4',
+                highlight: 'Collaborative team build',
+            },
+            badges: {
+                featured: false,
+                live: true,
+            },
+        },
+        meta: {
+            completedAt: '2025-05-06',
+            developmentPeriod: 'April 29 2025 to May 6 2025',
+            links: {
+                live: 'https://reading.projects.christianvieuxdev.com',
+                github: 'https://github.com/zackaryoconnor/Reading-Tracker-Front-End',
+            },
+        },
+        tech: [
+            tech('React', ReactIcon, 'tag-a', 'frontend'),
+            tech('Django', DjangoIcon, 'tag-b', 'backend'),
+            tech('Python', PythonIcon, 'tag-b', 'backend'),
+            tech('PostgreSQL', PostgresSQLIcon, 'tag-b', 'database'),
+            tech('AWS', AWSIcon, 'tag-c', 'cloud'),
+        ],
+    }),
 
-    // QuoteFolio Project
-    // {
-    //   period: "April 17 2025",
-    //   title: "QuoteFolio",
-    //   summary:
-    //     "**Quotes sharing platform** built with the MERN stack. Features a **clean interface** for sharing and discovering quotes, with user authentication and interactive features.",
-    //   description:
-    //     "Created during the **General Assembly** bootcamp. Built with **React** frontend and **Express/MongoDB** backend, allowing users to share and discover quotes. Implemented user authentication, quote management, and AWS deployment.",
-    //   features: [
-    //     "Browse and share quotes with the community",
-    //     "User authentication system",
-    //     "Personal quote collection management",
-    //     "Interactive features like likes and comments",
-    //     "Mobile-responsive design",
-    //   ],
-    //   image:
-    //     "https://res.cloudinary.com/dqbydfphk/image/upload/v1748975242/Portfolio/gkoneomahh2e89fwewhe.jpg",
-    //   technologies: ["React", "Express", "MongoDB", "Node.js"],
-    //   frontend: ["React", "Vite", "TailwindCSS"],
-    //   backend: ["Express.js", "MongoDB", "Node.js"],
-    //   libraries: [
-    //     {
-    //       category: "Frontend",
-    //       items: [
-    //         "React for UI components",
-    //         "TailwindCSS for styling",
-    //         "Axios for API requests",
-    //       ],
-    //     },
-    //     {
-    //       category: "Backend",
-    //       items: [
-    //         "Express.js for API server",
-    //         "Mongoose for database operations",
-    //         "express-session for authentication",
-    //       ],
-    //     },
-    //   ],
-    //   infrastructure: [
-    //     {
-    //       category: "Deployment",
-    //       items: [
-    //         "AWS EC2 for hosting",
-    //         "MongoDB Atlas database",
-    //         "Nginx web server",
-    //       ],
-    //     },
-    //     {
-    //       category: "Development",
-    //       items: [
-    //         "Git version control",
-    //         "Environment configuration",
-    //         "Team collaboration tools",
-    //       ],
-    //     },
-    //   ],
-    //   developmentPeriod: "April 11 2025 - April 17 2025",
-    //   liveLink: "https://quotes.projects.christianvieuxdev.com",
-    //   githubLink: "https://github.com/christianvieux/GA_Project_3_QuoteFolio",
-    // },
+    project({
+        id: 'quotefolio',
+        thumbnail:
+            'https://res.cloudinary.com/dqbydfphk/image/upload/v1748975242/Portfolio/gkoneomahh2e89fwewhe.jpg',
+        card: {
+            eyebrow: {
+                type: 'solo',
+                label: 'Solo project',
+                teamSize: null,
+            },
+            title: 'QuoteFolio',
+            description:
+                'Quote sharing platform for posting, discovering, and saving quotes.',
+            solves: 'sharing and discovering quotes',
+            stats: {
+                year: '2025',
+                context: 'Solo project',
+                highlight: 'First full CRUD implementation',
+            },
+            badges: {
+                featured: false,
+                live: true,
+            },
+        },
+        meta: {
+            completedAt: '2025-04-17',
+            developmentPeriod: 'April 11 2025 to April 17 2025',
+            links: {
+                live: 'https://quotes.projects.christianvieuxdev.com',
+                github: 'https://github.com/zackaryoconnor/Famous-Quotes',
+            },
+        },
+        tech: [
+            tech('React', ReactIcon, 'tag-a', 'frontend'),
+            tech('Node.js', NodejsIcon, 'tag-b', 'backend'),
+            tech('Express', ExpressIcon, 'tag-b', 'backend'),
+            tech('MongoDB', MongoDBIcon, 'tag-b', 'database'),
+        ],
+    }),
 
-    // Recipe Project
-    // {
-    //   period: "April 2 2025",
-    //   title: "Recipes",
-    //   summary:
-    //     "A **recipe management platform** built with Express and MongoDB. Features a **responsive interface** for sharing recipes, with user authentication and commenting system.",
-    //   description:
-    //     "Built during the **General Assembly** bootcamp. Created with **Express.js** and **MongoDB** for managing recipe content. Implemented user authentication, recipe management, and commenting features using **Bootstrap** for a clean, responsive interface.",
-    //   features: [
-    //     "Browse and search recipe collection",
-    //     "User authentication system",
-    //     "Comment on shared recipes",
-    //     "Manage personal recipe collection",
-    //     "Mobile-responsive Bootstrap interface",
-    //   ],
-    //   image:
-    //     "https://res.cloudinary.com/dqbydfphk/image/upload/v1748975732/Portfolio/iklyn9daqvpsurmamior.jpg",
-    //   technologies: ["Express.js", "MongoDB", "Bootstrap", "Node.js"],
-    //   frontend: ["EJS", "Bootstrap", "JavaScript"],
-    //   backend: ["Express.js", "MongoDB", "Node.js"],
-    //   libraries: [
-    //     {
-    //       category: "Frontend",
-    //       items: [
-    //         "Bootstrap for responsive UI",
-    //         "EJS for templating",
-    //         "jQuery for DOM manipulation",
-    //       ],
-    //     },
-    //     {
-    //       category: "Backend",
-    //       items: [
-    //         "Express.js for server routing",
-    //         "Mongoose for database operations",
-    //         "express-session for authentication",
-    //       ],
-    //     },
-    //   ],
-    //   infrastructure: [
-    //     {
-    //       category: "Deployment",
-    //       items: [
-    //         "AWS EC2 for hosting",
-    //         "MongoDB Atlas database",
-    //         "Nginx web server",
-    //       ],
-    //     },
-    //     {
-    //       category: "Development",
-    //       items: [
-    //         "Git version control",
-    //         "Environment configuration",
-    //         "MVC architecture",
-    //       ],
-    //     },
-    //   ],
-    //   developmentPeriod: "March 27 2025 - April 2 2025",
-    //   liveLink: "https://recipes.projects.christianvieuxdev.com",
-    //   githubLink: "https://github.com/christianvieux/GA_Project_2_Recipe",
-    // },
-
-    // TrackFusionWeb Project
-    // {
-    //   period: "Dec 30 2024",
-    //   title: "TrackFusionWeb",
-    //   summary:
-    //     "**Music streaming platform** that lets users upload and discover new music. Features a **modern interface** with playlist creation, audio playback controls, and user profiles.",
-    //   description:
-    //     "Developed a **Spotify-inspired** music platform where artists and listeners can connect. Built with **Next.js** and **Node.js**, the app handles audio streaming, user libraries, and content management through a clean interface. Uses **AWS** for reliable audio delivery and storage. Includes features like **queue management**, **track filtering**, and **mobile-responsive** design.",
-    //   features: [
-    //     "Simple user accounts to upload and manage audio content",
-    //     "Audio streaming functionality with basic playback controls",
-    //     "Personal library to play/manage uploaded content",
-    //     "Mobile-friendly design for listening on any device",
-    //     "Cloud storage for audio files using modern hosting solutions",
-    //   ],
-    //   image:
-    //     "https://res.cloudinary.com/dqbydfphk/image/upload/v1739083627/TrackFusionWeb_Thumbnail_ce0rsv.png",
-    //   demo: {
-    //     url: "https://christianvieux-public-files.s3.us-east-1.amazonaws.com/videos/Demo_Video_trackfusionweb.mp4",
-    //     timestamps: [
-    //       { time: "00:00", label: "Project Overview & Tech Stack" },
-    //       { time: "01:18", label: "Homepage & Navigation" },
-    //       { time: "02:00", label: "Account Creation Process" },
-    //       { time: "03:03", label: "Feed Page & Track Listing" },
-    //       { time: "04:04", label: "Queue System & Playback Controls" },
-    //       { time: "05:16", label: "Track Filtering & Search" },
-    //       { time: "06:39", label: "Track Upload Demonstration" },
-    //       { time: "08:28", label: "Account Settings & Wrap-up" },
-    //     ],
-    //   },
-
-    //   technologies: ["Next.js", "Node.js", "SQL", "AWS"],
-    //   frontend: ["Next.js", "React", "TailwindCSS"],
-    //   backend: ["Node.js", "Express", "PostgreSQL"],
-    //   libraries: [
-    //     // UI Components & Styling
-    //     {
-    //       category: "User Interface",
-    //       items: [
-    //         "NextUI for component library",
-    //         "Embla Carousel for image sliders",
-    //         "Framer Motion for animations",
-    //         "Lucide React for icons",
-    //       ],
-    //     },
-    //     {
-    //       category: "Media Processing",
-    //       items: [
-    //         "Browser Image Compression for upload optimization",
-    //         "Sharp for image optimization",
-    //         "Music Metadata for audio processing",
-    //       ],
-    //     },
-    //     {
-    //       category: "Core Functionality",
-    //       items: [
-    //         "Axios for API requests",
-    //         "Fuse.js for search functionality",
-    //         "React Hot Toast for notifications",
-    //       ],
-    //     },
-    //     {
-    //       category: "Backend Services",
-    //       items: [
-    //         "Express.js for API server",
-    //         "JWT and Bcrypt for authentication",
-    //         "Bull for job queue management",
-    //       ],
-    //     },
-    //   ],
-    //   infrastructure: [
-    //     {
-    //       category: "AWS Services",
-    //       items: [
-    //         "Amplify for frontend hosting",
-    //         "App Runner for API deployment",
-    //         "S3 for audio storage",
-    //         "ECR/ECS for Docker containerization",
-    //         "CloudWatch for monitoring and alerts",
-    //       ],
-    //     },
-    //     {
-    //       category: "Database & Storage",
-    //       items: ["PostgreSQL on Azure for database"],
-    //     },
-    //     {
-    //       category: "Security & DevOps",
-    //       items: [
-    //         "Express.js security middleware (Helmet, CORS, Rate Limiting)",
-    //         "Docker for containerization",
-    //       ],
-    //     },
-    //   ],
-    //   developmentPeriod: "May 10 2023 - Dec 30 2024",
-    //   liveLink: "https://trackfusionweb.vercel.app/home",
-    //   githubLink: "https://github.com/christianvieux/TrackFusionWeb",
-    // },
+    project({
+        id: 'recipes',
+        thumbnail:
+            'https://res.cloudinary.com/dqbydfphk/image/upload/v1748975732/Portfolio/iklyn9daqvpsurmamior.jpg',
+        card: {
+            eyebrow: {
+                type: 'solo',
+                label: 'Solo project',
+                teamSize: null,
+            },
+            title: 'Recipes',
+            description:
+                'Recipe management app for sharing recipes, comments, and personal collections.',
+            solves: 'organizing and sharing recipes',
+            stats: {
+                year: '2025',
+                context: 'Solo project',
+                highlight: 'Early full stack project',
+            },
+            badges: {
+                featured: false,
+                live: true,
+            },
+        },
+        meta: {
+            completedAt: '2025-04-02',
+            developmentPeriod: 'March 27 2025 to April 2 2025',
+            links: {
+                live: 'https://recipes.projects.christianvieuxdev.com',
+                github: 'https://github.com/christianvieux/GA_Project_2_Recipe',
+            },
+        },
+        tech: [
+            tech('Node.js', NodejsIcon, 'tag-b', 'backend'),
+            tech('Express', ExpressIcon, 'tag-b', 'backend'),
+            tech('MongoDB', MongoDBIcon, 'tag-b', 'database'),
+            tech('HTML', HTMLIcon, 'tag-a', 'frontend'),
+            tech('JavaScript', JSIcon, 'tag-a', 'frontend'),
+            tech('Bootstrap', BootstrapIcon, 'tag-a', 'frontend'),
+        ],
+    }),
 ]

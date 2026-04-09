@@ -1,7 +1,7 @@
 // components/IntroSummary.js
 
 import Markdown from 'react-markdown'
-import { heroContent } from '../data/heroContent'
+import { aboutContent } from '../data/aboutContent'
 
 export default function IntroSummary({ className }) {
     return (
@@ -21,7 +21,7 @@ export default function IntroSummary({ className }) {
                     ),
                 }}
             >
-                {heroContent.tagline}
+                {aboutContent.mainDescription}
             </Markdown>
         </div>
     )

@@ -19,10 +19,8 @@ const NavLink = ({ href, label, onClick }) => (
 // ─── Nav items config ─────────────────────────────────────────────────────────
 const NAV_LINKS = [
     { href: '#', label: 'Home' },
-    { href: '#projects', label: 'Projects' },
-    { href: '#gamedev', label: 'Game Dev' },
     { href: '#about', label: 'About' },
-    { href: '#focus', label: 'Focus' },
+    { href: '#projects', label: 'Projects' },
     { href: '#contact', label: 'Contact' },
 ]
 
@@ -58,13 +56,13 @@ const ResumeModal = ({ isOpen, onClose }) => {
 
             {/* Dialog */}
             <div
-                className="relative z-10 w-full max-w-5xl overflow-hidden rounded-xl bg-background shadow-2xl"
+                className="relative z-10 w-full max-w-5xl overflow-hidden rounded-xl border-4 border-primary/40 bg-secondary shadow-2xl"
                 onClick={(e) => e.stopPropagation()}
             >
                 {/* Close button */}
                 <button
                     onClick={onClose}
-                    className="absolute top-3 right-3 z-20 cursor-pointer rounded-md p-1.5 text-foreground transition-colors hover:bg-secondary"
+                    className="absolute top-3 right-3 z-20 cursor-pointer text-primary font-bold p-1.5 border-4 border-primary/40 rounded-lg bg-secondary transition-colors"
                     aria-label="Close"
                 >
                     <X size={18} />

@@ -27,10 +27,7 @@ export default function PortfolioLayout() {
                     // CurrentFocusSection,
                     // ContactSection,
                 ].map((Component, index) => (
-                    <>
                         <Component key={index} className={``} />
-                        {/* {index < 6 && <Separator key={`sep-${index}`} className="" />} */}
-                    </>
                 ))}
             </div>
             <Footer />
@@ -39,3 +36,4 @@ export default function PortfolioLayout() {
 }
 
 // TODO: need to add a contact me forum (when I have time)
+// TODO: polish the components more, remove redundant components, and more consistent styling

@@ -1,25 +1,43 @@
 // components/GameProjectModal.js
-import { Modal } from '@heroui/react'
+import { Modal, ModalBackdrop } from '@heroui/react'
+import { useEffect } from 'react'
+import Image from 'next/image'
 
-const GameProjectModal = ({ isOpen, onOpenChange, media, title }) => {
+const GameProjectModal = ({
+    media = {},
+    title,
+    isOpen = false,
+    onOpenChange = () => {},
+}) => {
+    useEffect(() => {
+        console.log('modal is open', isOpen)
+    }, [isOpen])
+
     return (
         <Modal
             isOpen={isOpen}
             onOpenChange={onOpenChange}
             size="2xl"
+            classnames
             classNames={{
-                base: 'bg-background',
-                header: '',
-                body: 'text-secondary-foreground',
+                body: '',
                 closeButton: 'hover:bg-secondary text-secondary-foreground',
             }}
         >
-            <Modal.Container>
-                {(onClose) => (
-                    <>
-                        <Modal.Header>{title}</Modal.Header>
+            <Modal.Backdrop>
+                <Modal.Container>
+                    <Modal.Dialog className="border-4 border-primary/40 bg-secondary my-auto">
+                        <Modal.CloseTrigger className="border-3 border-primary text-primary" />
+
+                        {/* Title */}
+                        <Modal.Header>
+                            <Modal.Heading className="font-bold">
+                                {title}
+                            </Modal.Heading>
+                        </Modal.Header>
+                        {/* Media content */}
                         <Modal.Body>
-                            <div className="aspect-video w-full">
+                            <div className="relative aspect-video w-full">
                                 {media.type === 'video' ? (
                                     <video
                                         src={media.url}
@@ -27,17 +45,18 @@ const GameProjectModal = ({ isOpen, onOpenChange, media, title }) => {
                                         className="h-full w-full rounded-lg"
                                     />
                                 ) : (
-                                    <img
+                                    <Image
                                         src={media.url}
                                         alt={title}
-                                        className="h-full w-full rounded-lg object-contain"
+                                        fill
+                                        className="m-auto !h-max !w-max rounded-lg border-3 border-primary/20 object-contain"
                                     />
                                 )}
                             </div>
                         </Modal.Body>
-                    </>
-                )}
-            </Modal.Container>
+                    </Modal.Dialog>
+                </Modal.Container>
+            </Modal.Backdrop>
         </Modal>
     )
 }

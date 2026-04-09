@@ -1,13 +1,12 @@
 // data/aboutContent.js
 export const aboutContent = {
-    mainDescription: `
-  Hi, I’m Christian — a junior software engineer with a background in game development and a passion for building things that people can use and enjoy.
+    mainDescription: `I’m a **full-stack software engineer** focused on building scalable, user-facing applications.
 
-  My coding journey started back in 2014 when I was in high school, developing games on Roblox just for fun. I loved creating worlds, learning new tools, and collaborating with others and over time, that hobby turned into something more serious. About two years ago, I started diving into web development. I began with a Udemy course, then challenged myself to build a full project from scratch, which really leveled me up. That experience pushed me to enroll in General Assembly’s Software Engineering Bootcamp, where I deepened my technical knowledge, grew my soft skills, and connected with some amazing people and mentors.
+I’ve been programming since **2014**, starting out with game development projects and gradually developing a deeper interest in software engineering. Over the past two years, I transitioned into web development, built full-stack applications from scratch, and completed **General Assembly’s Software Engineering Bootcamp**.
 
-  Now I’m looking for my first junior software engineering role but not just to get a job, but to join a team where I can grow, contribute, and make a real impact. I’m not claiming to be a unicorn or the best in the room, but I care deeply about what I do. When I’m passionate about something, I go all in! and I’m ready to bring that energy to the right team.
+I’ve also used **AWS** to deploy and manage applications, and I’m continuing to build a deeper understanding of how systems scale in real-world environments.
 
-  Thanks for taking the time to learn a bit about me. I’m excited for what’s ahead and hopeful to work with anyone who believe in giving people a real shot.
+I’m looking to join a team where I can contribute, keep improving, and help build products people actually use.
   `,
     skills: {
         frontend: [

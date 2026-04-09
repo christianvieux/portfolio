@@ -55,49 +55,73 @@ const VideoPlayerWithTimestamps = ({ videoUrl, timestamps, thumbnail }) => {
 
             {/* Timeline Navigation */}
             <div className="rounded-xl bg-secondary/10 p-1">
-                <div className="grid gap-1">
-                    {timestamps.map(({ time, label }, index) => {
-                        const isActive = activeSection?.time === time
-                        return (
-                            <button
-                                key={time}
-                                onClick={() => jumpToTimestamp(time)}
-                                className={`group relative rounded-lg py-3 text-left transition-all ${isActive ? 'bg-primary/10' : 'hover:bg-secondary/40'} flex items-center gap-4`}
-                            >
-                                {/* Visual Timeline Indicator */}
-                                <div className="relative flex items-center">
-                                    <div
-                                        className={`h-14 w-1 ${index === timestamps.length - 1 ? 'h-7' : ''} ${isActive ? 'bg-primary/30' : 'bg-border'} ${index === 0 ? 'rounded-t-full' : ''} ${index === timestamps.length - 1 ? 'rounded-b-full' : ''} absolute top-1/2 left-1/2 -translate-x-1/2 transform`}
-                                    />
-                                    <div
-                                        className={`z-10 h-3 w-3 rounded-full transition-colors ${isActive ? 'scale-125 bg-primary' : 'bg-secondary-foreground/30 group-hover:bg-secondary-foreground/50'}`}
-                                    />
-                                </div>
+    <div className="grid gap-1">
+        {timestamps.map(({ time, label }, index) => {
+            const isActive = activeSection?.time === time
+            const isLast = index === timestamps.length - 1
+            return (
+                <button
+                    key={time}
+                    onClick={() => jumpToTimestamp(time)}
+                    className={`group relative flex cursor-pointer items-center gap-4 rounded-lg py-3 text-left transition-colors ${
+                        isActive ? 'bg-primary/10' : 'hover:bg-secondary/40'
+                    }`}
+                >
+                    {/* Timeline column */}
+                    <div className="relative flex w-6 flex-shrink-0 flex-col items-center self-stretch">
+                        {/* Vertical line — hidden for last item */}
+                        {!isLast && (
+                            <div
+                                className={`absolute top-1/2 bottom-0 w-px ${
+                                    isActive ? 'bg-primary/30' : 'bg-border'
+                                }`}
+                            />
+                        )}
+                        {/* Dot */}
+                        <div
+                            className={`z-10 mt-auto mb-auto h-2.5 w-2.5 rounded-full transition-colors ${
+                                isActive
+                                    ? 'bg-primary'
+                                    : 'bg-secondary-foreground/30 group-hover:bg-secondary-foreground/50'
+                            }`}
+                        />
+                    </div>
 
-                                <div className="flex-1">
-                                    <div className="flex items-center gap-3">
-                                        <span
-                                            className={`font-mono text-sm transition-colors ${isActive ? 'font-medium text-primary' : 'text-muted-foreground group-hover:text-secondary-foreground'}`}
-                                        >
-                                            {time}
-                                        </span>
-                                        <span
-                                            className={`text-sm transition-colors ${isActive ? 'font-medium text-primary' : 'text-secondary-foreground'}`}
-                                        >
-                                            {label}
-                                        </span>
-                                    </div>
-                                </div>
+                    {/* Text */}
+                    <div className="flex flex-1 items-center gap-3">
+                        <span
+                            className={`font-mono text-sm transition-colors ${
+                                isActive
+                                    ? 'font-medium text-primary'
+                                    : 'text-muted-foreground'
+                            }`}
+                        >
+                            {time}
+                        </span>
+                        <span
+                            className={`text-sm transition-colors ${
+                                isActive
+                                    ? 'font-medium text-primary'
+                                    : 'text-secondary-foreground'
+                            }`}
+                        >
+                            {label}
+                        </span>
+                    </div>
 
-                                {/* Play Icon */}
-                                <PlayCircle
-                                    className={`h-5 w-5 transition-all ${isActive ? 'text-primary opacity-100' : 'opacity-0 group-hover:opacity-70'} transform group-hover:scale-110`}
-                                />
-                            </button>
-                        )
-                    })}
-                </div>
-            </div>
+                    {/* Play icon — no size change */}
+                    <PlayCircle
+                        className={`h-4 w-4 flex-shrink-0 transition-opacity ${
+                            isActive
+                                ? 'text-primary opacity-100'
+                                : 'opacity-0 group-hover:opacity-60'
+                        }`}
+                    />
+                </button>
+            )
+        })}
+    </div>
+</div>
         </div>
     )
 }

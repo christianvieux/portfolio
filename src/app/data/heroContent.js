@@ -3,7 +3,7 @@ export const heroContent = {
     name: 'Christian Vieux',
     title: 'Software Engineer',
     image: {
-        src: 'https://res.cloudinary.com/dqbydfphk/image/upload/v1775726176/2026_April_PFP.png',
+        src: 'https://res.cloudinary.com/dqbydfphk/image/upload/v1775795961/ChristianV_PFP_2026_April_eiknbd.png',
         alt: 'Christian Vieux',
     },
     tagline: `
